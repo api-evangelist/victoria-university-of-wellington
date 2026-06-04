@@ -1,0 +1,105 @@
+---
+aid: victoria-university-of-wellington
+name: Victoria University of Wellington
+description: >-
+  Te Herenga Waka—Victoria University of Wellington is a public research
+  university in Wellington, New Zealand, ranked #244 in the QS World University
+  Rankings 2025. It does not operate a centralized, publicly documented
+  developer portal; instead its public, machine-readable footprint is found in
+  standards-based scholarly and library infrastructure. Confirmed public
+  interfaces include a Figshare-powered Open Access research repository exposing
+  an OAI-PMH metadata feed and the Figshare v2 REST API, and an Ex Libris
+  Primo (Te Waharoa) discovery service backed by Alma. The university also
+  maintains public GitHub organizations for its web UI toolkit and library
+  engineering work.
+type: Index
+position: Consumer
+access: 3rd-Party
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/victoria-university-of-wellington/refs/heads/main/apis.yml
+tags:
+  - Education
+  - Higher Education
+  - University
+  - Research
+  - Open Access
+  - Library
+  - New Zealand
+created: '2026-06-03'
+modified: '2026-06-03'
+specificationVersion: '0.19'
+apis:
+  - aid: victoria-university-of-wellington:open-access-oai-pmh
+    name: Open Access Repository OAI-PMH
+    description: >-
+      OAI-PMH metadata harvesting feed for the Open Access Te Herenga
+      Waka—Victoria University of Wellington research repository, hosted on
+      Figshare. The university's records are exposed via the Figshare OAI-PMH
+      endpoint scoped to set portal_771, supporting Dublin Core and other
+      metadata prefixes. Verified live returning VUW article identifiers.
+    humanURL: https://www.wgtn.ac.nz/library/about-us/special-collections/open-access-institutional-repository
+    baseURL: https://api.figshare.com/v2/oai
+    tags: [ Open Access, OAI-PMH, Repository, Metadata, Research, Figshare ]
+    properties:
+      - type: Documentation
+        url: https://info.figshare.com/user-guide/how-to-use-figshares-oai-pmh-service/
+  - aid: victoria-university-of-wellington:figshare-rest
+    name: Figshare REST API (Open Access Repository)
+    description: >-
+      The Open Access Te Herenga Waka—Victoria University of Wellington
+      repository is powered by Figshare, whose public v2 REST API exposes
+      articles, collections, and project metadata. University outputs are
+      discoverable through the shared Figshare API surface; the documented,
+      public endpoint is operated by Figshare on the university's behalf.
+    humanURL: https://docs.figshare.com/
+    baseURL: https://api.figshare.com/v2
+    tags: [ Open Access, REST, Repository, Research, Figshare ]
+    properties:
+      - type: Documentation
+        url: https://docs.figshare.com/
+  - aid: victoria-university-of-wellington:primo-discovery
+    name: Te Waharoa Library Discovery (Primo / Alma)
+    description: >-
+      The university library's discovery service, branded Te Waharoa, runs on
+      Ex Libris Primo backed by Alma resource management. The public discovery
+      view uses VID 64VUW_INST:VUWNUI. Primo provides programmatic search and
+      delivery interfaces; the public-facing search UI is verified live.
+    humanURL: https://www.wgtn.ac.nz/library/how-to-use-the-library/searching-for-resources
+    baseURL: https://tewaharoa.victoria.ac.nz/discovery/search?vid=64VUW_INST:VUWNUI
+    tags: [ Library, Discovery, Primo, Alma, Ex Libris, Search ]
+    properties:
+      - type: Documentation
+        url: https://www.wgtn.ac.nz/library/how-to-use-the-library/searching-for-resources
+  - aid: victoria-university-of-wellington:web-globalobject
+    name: Website Global Object Endpoint
+    description: >-
+      An undocumented JSON configuration endpoint served by the university's
+      main website that returns global site object data such as base URLs,
+      logo, and navigation roots. Not a published developer API, but a
+      confirmed-live public JSON endpoint observed on the wgtn.ac.nz CMS.
+    humanURL: https://www.wgtn.ac.nz/
+    baseURL: https://www.wgtn.ac.nz/api/globalobject
+    tags: [ Website, JSON, CMS, Undocumented ]
+    properties:
+      - type: Documentation
+        url: https://www.wgtn.ac.nz/
+common:
+  - type: Website
+    url: https://www.wgtn.ac.nz/
+  - type: GitHub
+    url: https://github.com/victoriauniversity
+  - type: SourceCode
+    url: https://github.com/VUW-Library
+  - type: LinkedIn
+    url: https://www.linkedin.com/school/victoria-university-of-wellington/
+  - type: Plans
+    url: plans/victoria-university-of-wellington-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/victoria-university-of-wellington-rate-limits.yml
+  - type: FinOps
+    url: finops/victoria-university-of-wellington-finops.yml
+  - type: Review
+    url: review.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

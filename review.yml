@@ -1,0 +1,51 @@
+---
+name: Victoria University of Wellington
+description: Victoria University of Wellington public developer/API footprint review for APIs.json cataloging.
+url: https://raw.githubusercontent.com/api-evangelist/victoria-university-of-wellington/refs/heads/main/review.yml
+created: '2026-06-03'
+modified: '2026-06-03'
+reviews:
+  - date: '2026-06-03'
+    rating: 2
+    summary: >-
+      No centralized, branded developer portal exists for Te Herenga
+      Waka—Victoria University of Wellington. The verifiable public, machine-
+      readable footprint is standards-based scholarly and library
+      infrastructure: a Figshare-hosted Open Access repository exposing a live
+      OAI-PMH feed (set portal_771) and the public Figshare v2 REST API, plus
+      an Ex Libris Primo (Te Waharoa, VID 64VUW_INST:VUWNUI) discovery service
+      backed by Alma. Two public GitHub organizations were confirmed
+      (victoriauniversity web UI toolkit, VUW-Library engineering). An
+      undocumented JSON globalobject endpoint on the main website also responds.
+      All endpoints below were probed live; no endpoints were fabricated.
+    endpoints:
+      - url: https://www.wgtn.ac.nz/
+        status: 200
+        note: Official university website (Te Herenga Waka).
+      - url: https://api.figshare.com/v2/oai?verb=ListIdentifiers&metadataPrefix=oai_dc&set=portal_771
+        status: 200
+        note: OAI-PMH feed; live, returns VUW article identifiers under portal_771.
+      - url: https://api.figshare.com/v2/articles?page_size=1
+        status: 200
+        note: Public Figshare v2 REST API powering the Open Access repository.
+      - url: https://openaccess.wgtn.ac.nz/
+        status: 202
+        note: Figshare-powered Open Access research repository portal (challenge/JS gate, resolves).
+      - url: https://tewaharoa.victoria.ac.nz/discovery/search?vid=64VUW_INST:VUWNUI
+        status: 200
+        note: Primo (Te Waharoa) discovery search; Alma-backed, VID 64VUW_INST:VUWNUI.
+      - url: https://www.wgtn.ac.nz/api/globalobject
+        status: 200
+        note: Undocumented public JSON CMS config endpoint (baseUrls, logo, nav).
+      - url: https://github.com/victoriauniversity
+        status: 200
+        note: Official GitHub org; web UI kit/styles/toolkit repos.
+      - url: https://github.com/VUW-Library
+        status: 200
+        note: Wellington University Library GitHub org (libguides, DSpace, figshare-oaipmh-proxy).
+      - url: https://studentrecords.vuw.ac.nz/
+        status: 200
+        note: Student records SSO login portal; gated, no public API documented.
+      - url: https://www.linkedin.com/school/victoria-university-of-wellington/
+        status: 999
+        note: LinkedIn school page; 999 is LinkedIn anti-bot, page exists in browser.
