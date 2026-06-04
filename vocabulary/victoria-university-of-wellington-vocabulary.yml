@@ -1,0 +1,66 @@
+vocabulary:
+  name: Victoria University of Wellington Open Access Vocabulary
+  description: >-
+    Controlled terms describing the public, machine-readable scholarly and
+    library infrastructure of Te Herenga Waka—Victoria University of
+    Wellington, centered on the Figshare-powered Open Access repository and the
+    standards (OAI-PMH, OpenAPI) through which it is exposed.
+  version: "1.0.0"
+  terms:
+    - term: Article
+      definition: >-
+        A public research output (dataset, figure, paper, presentation, or
+        other artifact) deposited in the Figshare-powered Open Access
+        repository and exposed through the Figshare v2 REST API.
+      tags: [figshare, repository, research]
+    - term: DOI
+      definition: >-
+        Digital Object Identifier assigned to a published article, providing a
+        persistent, citable reference to the research output.
+      tags: [identifier, citation]
+    - term: Author
+      definition: >-
+        A contributor associated with an article, optionally carrying an ORCID
+        identifier and a Figshare profile url_name.
+      tags: [figshare, people]
+    - term: ORCID
+      definition: >-
+        Open Researcher and Contributor ID, a persistent identifier for an
+        individual researcher carried on the author object.
+      tags: [identifier, people]
+    - term: Category
+      definition: >-
+        A subject classification term assigned to an article within the
+        Figshare taxonomy.
+      tags: [taxonomy, classification]
+    - term: License
+      definition: >-
+        The reuse license attached to an article, such as CC BY 4.0, expressed
+        as a value, name, and URL.
+      tags: [licensing, open-access]
+    - term: ArticleFile
+      definition: >-
+        A downloadable file attached to an article, with size, MD5 checksum,
+        and a public download URL.
+      tags: [figshare, files]
+    - term: OAI-PMH
+      definition: >-
+        Open Archives Initiative Protocol for Metadata Harvesting, the
+        standards-based feed used to harvest VUW repository metadata via the
+        Figshare endpoint scoped to set portal_771.
+      tags: [oai-pmh, metadata, harvesting]
+    - term: Dublin Core
+      definition: >-
+        The default metadata schema (oai_dc) exposed through the OAI-PMH feed
+        for describing repository records.
+      tags: [oai-pmh, metadata, dublin-core]
+    - term: Primo
+      definition: >-
+        The Ex Libris discovery layer (branded Te Waharoa) that provides
+        library search and delivery over the Alma resource management system.
+      tags: [library, discovery, ex-libris]
+    - term: Set
+      definition: >-
+        An OAI-PMH selective-harvesting grouping; the VUW repository records
+        are scoped to the portal_771 set on the Figshare endpoint.
+      tags: [oai-pmh, harvesting]

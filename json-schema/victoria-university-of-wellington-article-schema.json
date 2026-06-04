@@ -1,0 +1,76 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/victoria-university-of-wellington/main/json-schema/victoria-university-of-wellington-article-schema.json",
+  "title": "FigshareArticle",
+  "description": "Public Figshare article record as exposed by the Open Access Te Herenga Waka—Victoria University of Wellington research repository via the Figshare v2 REST API.",
+  "type": "object",
+  "properties": {
+    "id": { "type": "integer", "description": "Unique article identifier." },
+    "title": { "type": "string", "description": "Article title." },
+    "doi": { "type": "string", "description": "Digital Object Identifier." },
+    "handle": { "type": "string", "description": "Persistent handle." },
+    "url": { "type": "string", "format": "uri", "description": "API URL for the article." },
+    "published_date": { "type": ["string", "null"], "format": "date-time" },
+    "modified_date": { "type": ["string", "null"], "format": "date-time" },
+    "created_date": { "type": ["string", "null"], "format": "date-time" },
+    "description": { "type": "string", "description": "Article description / abstract." },
+    "is_public": { "type": "boolean" },
+    "views": { "type": "integer" },
+    "downloads": { "type": "integer" },
+    "shares": { "type": "integer" },
+    "cites": { "type": "integer" },
+    "size": { "type": "integer", "description": "Total size of files in bytes." },
+    "version": { "type": "integer" },
+    "resource_doi": { "type": ["string", "null"] },
+    "resource_title": { "type": ["string", "null"] },
+    "item_type": { "type": "integer", "description": "Numeric content type identifier." },
+    "license": {
+      "type": "object",
+      "properties": {
+        "value": { "type": "integer" },
+        "name": { "type": "string" },
+        "url": { "type": "string", "format": "uri" }
+      }
+    },
+    "authors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer" },
+          "full_name": { "type": "string" },
+          "is_active": { "type": "boolean" },
+          "url_name": { "type": "string" },
+          "orcid_id": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer" },
+          "name": { "type": "string" },
+          "size": { "type": "integer" },
+          "computed_md5": { "type": ["string", "null"] },
+          "download_url": { "type": "string", "format": "uri" }
+        }
+      }
+    },
+    "categories": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer" },
+          "title": { "type": "string" },
+          "parent_id": { "type": ["integer", "null"] }
+        }
+      }
+    },
+    "tags": { "type": "array", "items": { "type": "string" } },
+    "custom_fields": { "type": "object", "additionalProperties": true }
+  },
+  "required": ["id", "title", "url"]
+}

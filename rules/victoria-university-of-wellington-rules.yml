@@ -1,0 +1,49 @@
+extends: [[spectral:oas, off]]
+formats: [oas3]
+documentationUrl: https://docs.figshare.com/
+rules:
+  vuw-info-contact:
+    description: Info object should include a contact.
+    given: $.info
+    severity: warn
+    then:
+      field: contact
+      function: truthy
+  vuw-info-license:
+    description: Info object should declare a license.
+    given: $.info
+    severity: warn
+    then:
+      field: license
+      function: truthy
+  vuw-server-figshare:
+    description: Server URL must point at the Figshare public v2 API.
+    given: $.servers[*].url
+    severity: error
+    then:
+      function: pattern
+      functionOptions:
+        match: "^https://api\\.figshare\\.com/v2"
+  vuw-operation-operationid:
+    description: Every operation must declare an operationId.
+    given: $.paths[*][get,post]
+    severity: error
+    then:
+      field: operationId
+      function: truthy
+  vuw-article-id-integer:
+    description: article_id path parameters should be typed as integers.
+    given: $.paths[*][*].parameters[?(@.name == 'article_id')].schema
+    severity: warn
+    then:
+      field: type
+      function: pattern
+      functionOptions:
+        match: "^integer$"
+  vuw-200-response:
+    description: GET operations should document a 200 response.
+    given: $.paths[*].get.responses
+    severity: warn
+    then:
+      field: "200"
+      function: truthy

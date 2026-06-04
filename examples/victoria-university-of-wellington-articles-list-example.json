@@ -1,0 +1,38 @@
+[
+  {
+    "id": 12345678,
+    "title": "Coastal sediment dataset, Wellington Harbour",
+    "doi": "10.6084/m9.figshare.12345678",
+    "handle": "",
+    "url": "https://api.figshare.com/v2/articles/12345678",
+    "published_date": "2024-06-15T10:30:00Z",
+    "modified_date": "2024-06-20T14:22:00Z",
+    "created_date": "2024-06-10T09:15:00Z",
+    "description": "A dataset of coastal sediment samples collected in Wellington Harbour.",
+    "is_public": true,
+    "views": 1250,
+    "downloads": 340,
+    "shares": 45,
+    "cites": 8,
+    "size": 524288000,
+    "version": 2
+  },
+  {
+    "id": 12345679,
+    "title": "Te reo Maori corpus, annotated subset",
+    "doi": "10.6084/m9.figshare.12345679",
+    "handle": "",
+    "url": "https://api.figshare.com/v2/articles/12345679",
+    "published_date": "2024-05-01T08:00:00Z",
+    "modified_date": "2024-05-02T08:00:00Z",
+    "created_date": "2024-04-28T08:00:00Z",
+    "description": "An annotated subset of a te reo Maori language corpus.",
+    "is_public": true,
+    "views": 880,
+    "downloads": 210,
+    "shares": 12,
+    "cites": 3,
+    "size": 10485760,
+    "version": 1
+  }
+]

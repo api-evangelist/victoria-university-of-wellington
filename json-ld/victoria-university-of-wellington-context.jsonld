@@ -1,0 +1,72 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "vuw": "https://www.wgtn.ac.nz/ns#",
+    "figshare": "https://api.figshare.com/v2/ns#",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "schema": "https://schema.org/",
+    "institution": {
+      "@id": "schema:CollegeOrUniversity"
+    },
+    "name": "schema:name",
+    "url": "schema:url",
+    "description": "schema:description",
+    "Article": {
+      "@id": "schema:Dataset",
+      "@context": {
+        "id": "schema:identifier",
+        "title": "schema:name",
+        "doi": "schema:identifier",
+        "handle": "schema:identifier",
+        "description": "schema:description",
+        "published_date": "schema:datePublished",
+        "modified_date": "schema:dateModified",
+        "created_date": "schema:dateCreated",
+        "url": "schema:url",
+        "views": "vuw:viewCount",
+        "downloads": "vuw:downloadCount",
+        "cites": "schema:citation",
+        "size": "schema:contentSize",
+        "version": "schema:version",
+        "license": "schema:license",
+        "authors": "schema:author",
+        "files": "schema:distribution",
+        "categories": "schema:about",
+        "tags": "schema:keywords"
+      }
+    },
+    "Author": {
+      "@id": "schema:Person",
+      "@context": {
+        "full_name": "schema:name",
+        "orcid_id": "schema:identifier",
+        "url_name": "schema:url"
+      }
+    },
+    "ArticleFile": {
+      "@id": "schema:DataDownload",
+      "@context": {
+        "name": "schema:name",
+        "size": "schema:contentSize",
+        "computed_md5": "vuw:md5",
+        "download_url": "schema:contentUrl"
+      }
+    },
+    "Category": {
+      "@id": "schema:DefinedTerm",
+      "@context": {
+        "title": "schema:name"
+      }
+    },
+    "License": {
+      "@id": "schema:CreativeWork",
+      "@context": {
+        "name": "schema:name",
+        "url": "schema:url"
+      }
+    }
+  },
+  "@type": "CollegeOrUniversity",
+  "name": "Te Herenga Waka—Victoria University of Wellington",
+  "url": "https://www.wgtn.ac.nz/"
+}

@@ -1,0 +1,366 @@
+openapi: 3.0.3
+info:
+  title: Figshare API (Open Access Repository)
+  description: >-
+    Public, read-only subset of the Figshare v2 REST API, which powers the
+    Open Access Te Herenga Waka—Victoria University of Wellington research
+    repository. Only the public, unauthenticated endpoints and objects that the
+    real Figshare OpenAPI description supports are included here. The full,
+    authoritative specification is published by Figshare at
+    https://docs.figshare.com/.
+  version: "2.0"
+  contact:
+    name: Figshare Support
+    url: https://support.figshare.com/support/home
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+  - url: https://api.figshare.com/v2
+    description: Figshare public API v2
+paths:
+  /articles:
+    get:
+      operationId: articles_list
+      summary: List public articles
+      description: >-
+        Returns a paginated list of public articles. For the Victoria
+        University of Wellington repository, results can be scoped using the
+        institution / group filtering parameters supported by Figshare.
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+        - name: page_size
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+        - name: order
+          in: query
+          schema:
+            type: string
+            enum: [published_date, modified_date, views, downloads, shares, cites]
+        - name: order_direction
+          in: query
+          schema:
+            type: string
+            enum: [asc, desc]
+      responses:
+        "200":
+          description: A list of public articles
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Article"
+  /articles/search:
+    post:
+      operationId: articles_search
+      summary: Search public articles
+      description: Returns a list of public articles filtered by the search parameters.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ArticleSearch"
+      responses:
+        "200":
+          description: A list of public articles matching the search
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Article"
+  /articles/{article_id}:
+    get:
+      operationId: article_details
+      summary: View an article
+      parameters:
+        - name: article_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Full article details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ArticleComplete"
+        "404":
+          description: Article not found
+  /articles/{article_id}/versions:
+    get:
+      operationId: article_versions
+      summary: List article versions
+      parameters:
+        - name: article_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: List of versions for the article
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ArticleVersion"
+  /articles/{article_id}/versions/{version_id}:
+    get:
+      operationId: article_version_details
+      summary: View a specific article version
+      parameters:
+        - name: article_id
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: version_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Full article details for the requested version
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ArticleComplete"
+  /articles/{article_id}/files:
+    get:
+      operationId: article_files
+      summary: List files for an article
+      parameters:
+        - name: article_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: List of files for the article
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ArticleFile"
+  /articles/{article_id}/files/{file_id}:
+    get:
+      operationId: article_file_details
+      summary: View a single article file
+      parameters:
+        - name: article_id
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: file_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: File details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ArticleFile"
+components:
+  schemas:
+    Article:
+      type: object
+      description: Public article listing entry.
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        doi:
+          type: string
+        handle:
+          type: string
+        url:
+          type: string
+          format: uri
+        published_date:
+          type: string
+          format: date-time
+          nullable: true
+        modified_date:
+          type: string
+          format: date-time
+          nullable: true
+        created_date:
+          type: string
+          format: date-time
+          nullable: true
+        description:
+          type: string
+        is_public:
+          type: boolean
+        views:
+          type: integer
+        downloads:
+          type: integer
+        shares:
+          type: integer
+        cites:
+          type: integer
+        size:
+          type: integer
+          format: int64
+        version:
+          type: integer
+    ArticleComplete:
+      allOf:
+        - $ref: "#/components/schemas/Article"
+        - type: object
+          description: Full article details including authors, files and categories.
+          properties:
+            resource_doi:
+              type: string
+              nullable: true
+            resource_title:
+              type: string
+              nullable: true
+            item_type:
+              type: integer
+            license:
+              $ref: "#/components/schemas/License"
+            authors:
+              type: array
+              items:
+                $ref: "#/components/schemas/Author"
+            files:
+              type: array
+              items:
+                $ref: "#/components/schemas/ArticleFile"
+            categories:
+              type: array
+              items:
+                $ref: "#/components/schemas/Category"
+            tags:
+              type: array
+              items:
+                type: string
+            references:
+              type: array
+              items:
+                type: string
+            custom_fields:
+              type: object
+              additionalProperties: true
+    ArticleVersion:
+      type: object
+      properties:
+        version:
+          type: integer
+        url:
+          type: string
+          format: uri
+    Author:
+      type: object
+      properties:
+        id:
+          type: integer
+        full_name:
+          type: string
+        is_active:
+          type: boolean
+        url_name:
+          type: string
+        orcid_id:
+          type: string
+          nullable: true
+    ArticleFile:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        size:
+          type: integer
+          format: int64
+        computed_md5:
+          type: string
+          nullable: true
+        download_url:
+          type: string
+          format: uri
+        is_link_only:
+          type: boolean
+    Category:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        parent_id:
+          type: integer
+          nullable: true
+    License:
+      type: object
+      properties:
+        value:
+          type: integer
+        name:
+          type: string
+        url:
+          type: string
+          format: uri
+    ArticleSearch:
+      type: object
+      properties:
+        search_for:
+          type: string
+        doi:
+          type: string
+        handle:
+          type: string
+        institution:
+          type: integer
+        group:
+          type: integer
+        published_since:
+          type: string
+          format: date
+        modified_since:
+          type: string
+          format: date
+        order:
+          type: string
+          enum: [published_date, modified_date, views, downloads, shares, cites]
+        order_direction:
+          type: string
+          enum: [asc, desc]
+        page:
+          type: integer
+        page_size:
+          type: integer

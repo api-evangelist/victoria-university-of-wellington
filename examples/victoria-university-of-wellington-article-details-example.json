@@ -1,0 +1,60 @@
+{
+  "id": 12345678,
+  "title": "Coastal sediment dataset, Wellington Harbour",
+  "doi": "10.6084/m9.figshare.12345678",
+  "handle": "",
+  "url": "https://api.figshare.com/v2/articles/12345678",
+  "published_date": "2024-06-15T10:30:00Z",
+  "modified_date": "2024-06-20T14:22:00Z",
+  "created_date": "2024-06-10T09:15:00Z",
+  "description": "A dataset of coastal sediment samples collected in Wellington Harbour, including grain-size analysis and geochemistry.",
+  "is_public": true,
+  "views": 1250,
+  "downloads": 340,
+  "shares": 45,
+  "cites": 8,
+  "size": 524288000,
+  "version": 2,
+  "resource_doi": null,
+  "resource_title": null,
+  "item_type": 3,
+  "license": {
+    "value": 1,
+    "name": "CC BY 4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "authors": [
+    {
+      "id": 9876543,
+      "full_name": "Aroha Ngata",
+      "is_active": true,
+      "url_name": "aroha-ngata",
+      "orcid_id": "0000-0001-2345-6789"
+    },
+    {
+      "id": 9876544,
+      "full_name": "John Doe",
+      "is_active": true,
+      "url_name": "john-doe",
+      "orcid_id": null
+    }
+  ],
+  "files": [
+    {
+      "id": 54321,
+      "name": "sediment_samples.csv",
+      "size": 102400,
+      "computed_md5": "abc123def4567890abc123def4567890",
+      "download_url": "https://ndownloader.figshare.com/files/54321"
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "title": "Earth Sciences",
+      "parent_id": null
+    }
+  ],
+  "tags": ["sediment", "Wellington Harbour", "geochemistry", "dataset"],
+  "custom_fields": {}
+}

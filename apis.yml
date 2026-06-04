@@ -57,6 +57,18 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.figshare.com/
+      - type: OpenAPI
+        url: openapi/victoria-university-of-wellington-figshare-rest.yaml
+      - type: JSONSchema
+        url: json-schema/victoria-university-of-wellington-article-schema.json
+      - type: x-json-structure
+        url: json-structure/victoria-university-of-wellington-article-structure.json
+      - type: x-spectral-rules
+        url: rules/victoria-university-of-wellington-rules.yml
+      - type: x-vocabulary
+        url: vocabulary/victoria-university-of-wellington-vocabulary.yml
+      - type: x-json-ld-context
+        url: json-ld/victoria-university-of-wellington-context.jsonld
   - aid: victoria-university-of-wellington:primo-discovery
     name: Te Waharoa Library Discovery (Primo / Alma)
     description: >-
