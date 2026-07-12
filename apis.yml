@@ -96,6 +96,10 @@ apis:
       - type: Documentation
         url: https://www.wgtn.ac.nz/
 common:
+  - type: DomainSecurity
+    url: security/victoria-university-of-wellington-domain-security.yml
+  - url: https://www.wgtn.ac.nz/news/rss
+    type: Blog
   - type: Website
     url: https://www.wgtn.ac.nz/
   - type: GitHub
