@@ -1,0 +1,14 @@
+{
+  "repo": "victoria-university-of-wellington",
+  "feeds": [
+    {
+      "source": "https://www.wgtn.ac.nz/news/rss",
+      "feed_url": "https://www.wgtn.ac.nz/news/rss",
+      "title": "",
+      "saved": 7,
+      "method": "feed"
+    }
+  ],
+  "post_count": 7,
+  "fetched": "2026-07-11T11:50:51Z"
+}
