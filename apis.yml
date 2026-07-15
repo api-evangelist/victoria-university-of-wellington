@@ -96,6 +96,8 @@ apis:
       - type: Documentation
         url: https://www.wgtn.ac.nz/
 common:
+  - type: AgenticAccess
+    url: agentic-access/victoria-university-of-wellington-agentic-access.yml
   - type: DomainSecurity
     url: security/victoria-university-of-wellington-domain-security.yml
   - url: https://www.wgtn.ac.nz/news/rss
