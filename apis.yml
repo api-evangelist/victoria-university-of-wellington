@@ -13,9 +13,21 @@ description: >-
   maintains public GitHub organizations for its web UI toolkit and library
   engineering work.
 type: Index
+accessModel:
+  pricing: free
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Free
+  confidence: medium
+  source:
+  - plans
+  generated: '2026-07-22'
+  method: derived
 position: Consumer
 access: 3rd-Party
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/victoria-university-of-wellington.png
 url: https://raw.githubusercontent.com/api-evangelist/victoria-university-of-wellington/refs/heads/main/apis.yml
 tags:
   - Education
@@ -29,72 +41,83 @@ created: '2026-06-03'
 modified: '2026-06-03'
 specificationVersion: '0.19'
 apis:
-  - aid: victoria-university-of-wellington:open-access-oai-pmh
-    name: Open Access Repository OAI-PMH
-    description: >-
-      OAI-PMH metadata harvesting feed for the Open Access Te Herenga
-      Waka—Victoria University of Wellington research repository, hosted on
-      Figshare. The university's records are exposed via the Figshare OAI-PMH
-      endpoint scoped to set portal_771, supporting Dublin Core and other
-      metadata prefixes. Verified live returning VUW article identifiers.
-    humanURL: https://www.wgtn.ac.nz/library/about-us/special-collections/open-access-institutional-repository
-    baseURL: https://api.figshare.com/v2/oai
-    tags: [ Open Access, OAI-PMH, Repository, Metadata, Research, Figshare ]
-    properties:
-      - type: Documentation
-        url: https://info.figshare.com/user-guide/how-to-use-figshares-oai-pmh-service/
-  - aid: victoria-university-of-wellington:figshare-rest
-    name: Figshare REST API (Open Access Repository)
-    description: >-
-      The Open Access Te Herenga Waka—Victoria University of Wellington
-      repository is powered by Figshare, whose public v2 REST API exposes
-      articles, collections, and project metadata. University outputs are
-      discoverable through the shared Figshare API surface; the documented,
-      public endpoint is operated by Figshare on the university's behalf.
-    humanURL: https://docs.figshare.com/
-    baseURL: https://api.figshare.com/v2
-    tags: [ Open Access, REST, Repository, Research, Figshare ]
-    properties:
-      - type: Documentation
-        url: https://docs.figshare.com/
-      - type: OpenAPI
-        url: openapi/victoria-university-of-wellington-figshare-rest.yaml
-      - type: JSONSchema
-        url: json-schema/victoria-university-of-wellington-article-schema.json
-      - type: x-json-structure
-        url: json-structure/victoria-university-of-wellington-article-structure.json
-      - type: x-spectral-rules
-        url: rules/victoria-university-of-wellington-rules.yml
-      - type: x-vocabulary
-        url: vocabulary/victoria-university-of-wellington-vocabulary.yml
-      - type: x-json-ld-context
-        url: json-ld/victoria-university-of-wellington-context.jsonld
-  - aid: victoria-university-of-wellington:primo-discovery
-    name: Te Waharoa Library Discovery (Primo / Alma)
-    description: >-
-      The university library's discovery service, branded Te Waharoa, runs on
-      Ex Libris Primo backed by Alma resource management. The public discovery
-      view uses VID 64VUW_INST:VUWNUI. Primo provides programmatic search and
-      delivery interfaces; the public-facing search UI is verified live.
-    humanURL: https://www.wgtn.ac.nz/library/how-to-use-the-library/searching-for-resources
-    baseURL: https://tewaharoa.victoria.ac.nz/discovery/search?vid=64VUW_INST:VUWNUI
-    tags: [ Library, Discovery, Primo, Alma, Ex Libris, Search ]
-    properties:
-      - type: Documentation
-        url: https://www.wgtn.ac.nz/library/how-to-use-the-library/searching-for-resources
-  - aid: victoria-university-of-wellington:web-globalobject
-    name: Website Global Object Endpoint
-    description: >-
-      An undocumented JSON configuration endpoint served by the university's
-      main website that returns global site object data such as base URLs,
-      logo, and navigation roots. Not a published developer API, but a
-      confirmed-live public JSON endpoint observed on the wgtn.ac.nz CMS.
-    humanURL: https://www.wgtn.ac.nz/
-    baseURL: https://www.wgtn.ac.nz/api/globalobject
-    tags: [ Website, JSON, CMS, Undocumented ]
-    properties:
-      - type: Documentation
-        url: https://www.wgtn.ac.nz/
+- aid: victoria-university-of-wellington:open-access-oai-pmh
+  name: Open Access Repository OAI-PMH
+  description: >-
+    OAI-PMH metadata harvesting feed for the Open Access Te Herenga Waka—Victoria University of Wellington
+    research repository, hosted on Figshare. The university's records are exposed via the Figshare OAI-PMH
+    endpoint scoped to set portal_771, supporting Dublin Core and other metadata prefixes. Verified live
+    returning VUW article identifiers.
+  humanURL: >-
+    https://www.wgtn.ac.nz/library/about-us/special-collections/open-access-institutional-repository
+  baseURL: https://api.figshare.com/v2/oai
+  tags:
+  - Open Access
+  - OAI-PMH
+  - Repository
+  - Metadata
+  - Research
+  - Figshare
+  properties:
+  - type: Documentation
+    url: https://info.figshare.com/user-guide/how-to-use-figshares-oai-pmh-service/
+- aid: victoria-university-of-wellington:primo-discovery
+  name: Te Waharoa Library Discovery (Primo / Alma)
+  description: >-
+    The university library's discovery service, branded Te Waharoa, runs on Ex Libris Primo backed by
+    Alma resource management. The public discovery view uses VID 64VUW_INST:VUWNUI. Primo provides programmatic
+    search and delivery interfaces; the public-facing search UI is verified live.
+  humanURL: https://www.wgtn.ac.nz/library/how-to-use-the-library/searching-for-resources
+  baseURL: https://tewaharoa.victoria.ac.nz/discovery/search?vid=64VUW_INST:VUWNUI
+  tags:
+  - Library
+  - Discovery
+  - Primo
+  - Alma
+  - Ex Libris
+  - Search
+  properties:
+  - type: Documentation
+    url: https://www.wgtn.ac.nz/library/how-to-use-the-library/searching-for-resources
+- aid: victoria-university-of-wellington:web-globalobject
+  name: Website Global Object Endpoint
+  description: >-
+    An undocumented JSON configuration endpoint served by the university's main website that returns global
+    site object data such as base URLs, logo, and navigation roots. Not a published developer API, but
+    a confirmed-live public JSON endpoint observed on the wgtn.ac.nz CMS.
+  humanURL: https://www.wgtn.ac.nz/
+  baseURL: https://www.wgtn.ac.nz/api/globalobject
+  tags:
+  - Website
+  - JSON
+  - CMS
+  - Undocumented
+  properties:
+  - type: Documentation
+    url: https://www.wgtn.ac.nz/
+- aid: victoria-university-of-wellington:victoria-university-of-wellington-articles-api
+  name: Victoria University of Wellington Articles API
+  description: The Articles API from Victoria University of Wellington — 7 operation(s) for articles.
+  humanURL: >-
+    https://www.wgtn.ac.nz/library/about-us/special-collections/open-access-institutional-repository
+  baseURL: https://api.figshare.com/v2/oai
+  tags:
+  - Articles
+  properties:
+  - type: OpenAPI
+    url: openapi/victoria-university-of-wellington-articles-api-openapi.yml
+  - type: Documentation
+    url: https://docs.figshare.com/
+  - type: JSONSchema
+    url: json-schema/victoria-university-of-wellington-article-schema.json
+  - type: x-json-structure
+    url: json-structure/victoria-university-of-wellington-article-structure.json
+  - type: x-spectral-rules
+    url: rules/victoria-university-of-wellington-rules.yml
+  - type: x-vocabulary
+    url: vocabulary/victoria-university-of-wellington-vocabulary.yml
+  - type: x-json-ld-context
+    url: json-ld/victoria-university-of-wellington-context.jsonld
 common:
   - type: AgenticAccess
     url: agentic-access/victoria-university-of-wellington-agentic-access.yml
