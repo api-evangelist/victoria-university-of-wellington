@@ -1,0 +1,14 @@
+{
+  "provider": "victoria-university-of-wellington",
+  "sources": [
+    "victoria-university-of-wellington-articles-api-openapi.yml"
+  ],
+  "outputs": [
+    "victoria-university-of-wellington-articles-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
