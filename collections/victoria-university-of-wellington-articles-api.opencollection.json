@@ -1,0 +1,176 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Figshare API (Open Access Repository) Articles API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Articles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List public articles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.figshare.com/v2/articles",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "order_direction",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of public articles. For the Victoria University of Wellington repository, results can be scoped using the institution / group filtering parameters supported by Figshare."
+        },
+        {
+          "info": {
+            "name": "Search public articles",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.figshare.com/v2/articles/search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns a list of public articles filtered by the search parameters."
+        },
+        {
+          "info": {
+            "name": "View an article",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.figshare.com/v2/articles/:article_id",
+            "params": [
+              {
+                "name": "article_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "View an article"
+        },
+        {
+          "info": {
+            "name": "List article versions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.figshare.com/v2/articles/:article_id/versions",
+            "params": [
+              {
+                "name": "article_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List article versions"
+        },
+        {
+          "info": {
+            "name": "View a specific article version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.figshare.com/v2/articles/:article_id/versions/:version_id",
+            "params": [
+              {
+                "name": "article_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "version_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "View a specific article version"
+        },
+        {
+          "info": {
+            "name": "List files for an article",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.figshare.com/v2/articles/:article_id/files",
+            "params": [
+              {
+                "name": "article_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List files for an article"
+        },
+        {
+          "info": {
+            "name": "View a single article file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.figshare.com/v2/articles/:article_id/files/:file_id",
+            "params": [
+              {
+                "name": "article_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "file_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "View a single article file"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

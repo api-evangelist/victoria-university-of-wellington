@@ -1,0 +1,754 @@
+{
+  "item": [
+    {
+      "id": "210a2a4c-fa13-4b0b-bb30-efbb007ce04f",
+      "name": "Articles",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5f9a6172-cdcf-4cb7-ad92-6a0cc00d9c4d",
+          "name": "List public articles",
+          "request": {
+            "name": "List public articles",
+            "description": {
+              "content": "Returns a paginated list of public articles. For the Victoria University of Wellington repository, results can be scoped using the institution / group filtering parameters supported by Figshare.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "articles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "order_direction",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8b495058-36f8-4d0c-bfdf-5e0a27ecc128",
+              "name": "A list of public articles",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "articles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_direction",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 17,\n    \"title\": \"string\",\n    \"doi\": \"string\",\n    \"handle\": \"string\",\n    \"url\": \"http://ikAWt.hyvlKkmwnqDqPSC43xm\",\n    \"published_date\": \"2022-06-23T19:54:58.190Z\",\n    \"modified_date\": \"1992-07-01T16:48:35.547Z\",\n    \"created_date\": \"1974-08-31T11:32:31.563Z\",\n    \"description\": \"string\",\n    \"is_public\": false,\n    \"views\": 1508,\n    \"downloads\": 1310,\n    \"shares\": 2071,\n    \"cites\": 5211,\n    \"size\": 6051,\n    \"version\": 6035\n  },\n  {\n    \"id\": 8854,\n    \"title\": \"string\",\n    \"doi\": \"string\",\n    \"handle\": \"string\",\n    \"url\": \"https://cPbpXhClvdpNTatdysDAtDcELMdfxg.gcuqOW+9Nadzipm+zddkazjmKNKXFtwWjrIGXFVsPyetYhe\",\n    \"published_date\": \"1975-07-10T17:56:12.979Z\",\n    \"modified_date\": \"1948-11-26T16:49:33.401Z\",\n    \"created_date\": \"2010-03-29T05:48:00.605Z\",\n    \"description\": \"string\",\n    \"is_public\": false,\n    \"views\": 9800,\n    \"downloads\": 2733,\n    \"shares\": 2120,\n    \"cites\": 6893,\n    \"size\": 2605,\n    \"version\": 7736\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "922305cb-6cd7-4faa-b32a-77ca0f98ef15",
+          "name": "Search public articles",
+          "request": {
+            "name": "Search public articles",
+            "description": {
+              "content": "Returns a list of public articles filtered by the search parameters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "articles",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"search_for\": \"<string>\",\n  \"doi\": \"<string>\",\n  \"handle\": \"<string>\",\n  \"institution\": \"<integer>\",\n  \"group\": \"<integer>\",\n  \"published_since\": \"<date>\",\n  \"modified_since\": \"<date>\",\n  \"order\": \"<string>\",\n  \"order_direction\": \"<string>\",\n  \"page\": \"<integer>\",\n  \"page_size\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c1cb81b7-b646-4ebd-bc65-380c3aa70729",
+              "name": "A list of public articles matching the search",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "articles",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"search_for\": \"<string>\",\n  \"doi\": \"<string>\",\n  \"handle\": \"<string>\",\n  \"institution\": \"<integer>\",\n  \"group\": \"<integer>\",\n  \"published_since\": \"<date>\",\n  \"modified_since\": \"<date>\",\n  \"order\": \"<string>\",\n  \"order_direction\": \"<string>\",\n  \"page\": \"<integer>\",\n  \"page_size\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 17,\n    \"title\": \"string\",\n    \"doi\": \"string\",\n    \"handle\": \"string\",\n    \"url\": \"http://ikAWt.hyvlKkmwnqDqPSC43xm\",\n    \"published_date\": \"2022-06-23T19:54:58.190Z\",\n    \"modified_date\": \"1992-07-01T16:48:35.547Z\",\n    \"created_date\": \"1974-08-31T11:32:31.563Z\",\n    \"description\": \"string\",\n    \"is_public\": false,\n    \"views\": 1508,\n    \"downloads\": 1310,\n    \"shares\": 2071,\n    \"cites\": 5211,\n    \"size\": 6051,\n    \"version\": 6035\n  },\n  {\n    \"id\": 8854,\n    \"title\": \"string\",\n    \"doi\": \"string\",\n    \"handle\": \"string\",\n    \"url\": \"https://cPbpXhClvdpNTatdysDAtDcELMdfxg.gcuqOW+9Nadzipm+zddkazjmKNKXFtwWjrIGXFVsPyetYhe\",\n    \"published_date\": \"1975-07-10T17:56:12.979Z\",\n    \"modified_date\": \"1948-11-26T16:49:33.401Z\",\n    \"created_date\": \"2010-03-29T05:48:00.605Z\",\n    \"description\": \"string\",\n    \"is_public\": false,\n    \"views\": 9800,\n    \"downloads\": 2733,\n    \"shares\": 2120,\n    \"cites\": 6893,\n    \"size\": 2605,\n    \"version\": 7736\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c92ffa07-6763-44fd-8be4-7db5563d02eb",
+          "name": "View an article",
+          "request": {
+            "name": "View an article",
+            "description": {},
+            "url": {
+              "path": [
+                "articles",
+                ":article_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "article_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "97c44bca-6201-4ecc-b66b-d6ab3776cd9e",
+              "name": "Full article details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "articles",
+                    ":article_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "article_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1507,\n  \"title\": \"string\",\n  \"doi\": \"string\",\n  \"handle\": \"string\",\n  \"url\": \"https://XaFwFeBttoZIqeQZScjajFOgAtQsZQ.ekhsiel.rbTBXZ-wjQ2VVZWSHrrXUpWWu7w1ZZkFJrRnAPB,CkYm1ugzfK3ERj\",\n  \"published_date\": \"1989-07-14T03:39:40.185Z\",\n  \"modified_date\": \"1981-08-21T16:24:40.470Z\",\n  \"created_date\": \"1972-08-05T17:47:04.493Z\",\n  \"description\": \"string\",\n  \"is_public\": true,\n  \"views\": 2831,\n  \"downloads\": 3942,\n  \"shares\": 6773,\n  \"cites\": 5812,\n  \"size\": 9534,\n  \"version\": 5448,\n  \"resource_doi\": \"string\",\n  \"resource_title\": \"string\",\n  \"item_type\": 562,\n  \"license\": {\n    \"value\": 2727,\n    \"name\": \"string\",\n    \"url\": \"http://sdeCOEStBmPWqUWxbFiPCkqDdI.vrdCGOjmG6ZZZNUnvDyB8dMmHF410+hAJMNwnKn1Ofh\"\n  },\n  \"authors\": [\n    {\n      \"id\": 5097,\n      \"full_name\": \"string\",\n      \"is_active\": false,\n      \"url_name\": \"string\",\n      \"orcid_id\": \"string\"\n    },\n    {\n      \"id\": 7433,\n      \"full_name\": \"string\",\n      \"is_active\": false,\n      \"url_name\": \"string\",\n      \"orcid_id\": \"string\"\n    }\n  ],\n  \"files\": [\n    {\n      \"id\": 8340,\n      \"name\": \"string\",\n      \"size\": 59,\n      \"computed_md5\": \"string\",\n      \"download_url\": \"https://QqZqhfBDIn.iaPzu\",\n      \"is_link_only\": true\n    },\n    {\n      \"id\": 8843,\n      \"name\": \"string\",\n      \"size\": 5413,\n      \"computed_md5\": \"string\",\n      \"download_url\": \"https://xhSJDuiHWkEOgruseOrZPBOxScbUipl.ukBIaCj,nbIM4L46dvEaFRInL62eJxjZWi+OEa,ght5js2G.\",\n      \"is_link_only\": true\n    }\n  ],\n  \"categories\": [\n    {\n      \"id\": 8412,\n      \"title\": \"string\",\n      \"parent_id\": 6933\n    },\n    {\n      \"id\": 7881,\n      \"title\": \"string\",\n      \"parent_id\": 8167\n    }\n  ],\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ],\n  \"references\": [\n    \"string\",\n    \"string\"\n  ],\n  \"custom_fields\": {\n    \"key_0\": 5975.745025251466,\n    \"key_1\": 2887.2212011609467,\n    \"key_2\": 2613\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3d022bec-f614-4fc0-a39c-ecc76b2dcc10",
+              "name": "Article not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "articles",
+                    ":article_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "article_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "44d4e263-668c-405c-b751-fc46d376ff9e",
+          "name": "List article versions",
+          "request": {
+            "name": "List article versions",
+            "description": {},
+            "url": {
+              "path": [
+                "articles",
+                ":article_id",
+                "versions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "article_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0d84070a-c992-442c-845a-c950e29f1739",
+              "name": "List of versions for the article",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "articles",
+                    ":article_id",
+                    "versions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "article_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"version\": 3543,\n    \"url\": \"http://HONsXNYFYT.ojIJd8McmwADVaKxt+C3snSCpr3,wK,iX7LwY53+BrTHu8HL06mp.,LKhF\"\n  },\n  {\n    \"version\": 6468,\n    \"url\": \"http://KUPCRyaLqhCCwtaemHvEheol.hwAmRCj+Au+.hTCYepBR1ZgLSy1oN8HR\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "30015064-a412-4c5a-83a7-62a6acf76ce8",
+          "name": "View a specific article version",
+          "request": {
+            "name": "View a specific article version",
+            "description": {},
+            "url": {
+              "path": [
+                "articles",
+                ":article_id",
+                "versions",
+                ":version_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "article_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "version_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cfb631f9-84c3-4db0-a48e-3388f26311b6",
+              "name": "Full article details for the requested version",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "articles",
+                    ":article_id",
+                    "versions",
+                    ":version_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "article_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "version_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 2880,\n  \"title\": \"string\",\n  \"doi\": \"string\",\n  \"handle\": \"string\",\n  \"url\": \"https://kSEyneufFYBmTEgtB.mdtuqHbCklRmKXW,fY4G-1KjRma\",\n  \"published_date\": \"1999-07-31T04:19:07.635Z\",\n  \"modified_date\": \"2010-10-20T16:02:50.045Z\",\n  \"created_date\": \"1961-07-16T11:09:25.965Z\",\n  \"description\": \"string\",\n  \"is_public\": true,\n  \"views\": 4547,\n  \"downloads\": 44,\n  \"shares\": 8016,\n  \"cites\": 6741,\n  \"size\": 5046,\n  \"version\": 3401,\n  \"resource_doi\": \"string\",\n  \"resource_title\": \"string\",\n  \"item_type\": 9479,\n  \"license\": {\n    \"value\": 4602,\n    \"name\": \"string\",\n    \"url\": \"https://yzwIDNXtbybTVIijzLrJBaHlHPhYeUzCz.pjQ,EXBIYBAJ8.0TNy\"\n  },\n  \"authors\": [\n    {\n      \"id\": 8846,\n      \"full_name\": \"string\",\n      \"is_active\": true,\n      \"url_name\": \"string\",\n      \"orcid_id\": \"string\"\n    },\n    {\n      \"id\": 1802,\n      \"full_name\": \"string\",\n      \"is_active\": false,\n      \"url_name\": \"string\",\n      \"orcid_id\": \"string\"\n    }\n  ],\n  \"files\": [\n    {\n      \"id\": 3869,\n      \"name\": \"string\",\n      \"size\": 4835,\n      \"computed_md5\": \"string\",\n      \"download_url\": \"https://TArYxxiDKlTQrpQOPVBmqWw.okK95KdIhiLtG9jwYg0sFidQ+U9Fre\",\n      \"is_link_only\": false\n    },\n    {\n      \"id\": 8284,\n      \"name\": \"string\",\n      \"size\": 8864,\n      \"computed_md5\": \"string\",\n      \"download_url\": \"https://Fn.cxnwC0miwUWuxfAb-Dx+sCjLz3EZ2z-zlNIwudU0xiWdaMo\",\n      \"is_link_only\": true\n    }\n  ],\n  \"categories\": [\n    {\n      \"id\": 9253,\n      \"title\": \"string\",\n      \"parent_id\": 3365\n    },\n    {\n      \"id\": 4982,\n      \"title\": \"string\",\n      \"parent_id\": 4831\n    }\n  ],\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ],\n  \"references\": [\n    \"string\",\n    \"string\"\n  ],\n  \"custom_fields\": {\n    \"key_0\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "06415444-b8fd-4046-9102-891756adddc6",
+          "name": "List files for an article",
+          "request": {
+            "name": "List files for an article",
+            "description": {},
+            "url": {
+              "path": [
+                "articles",
+                ":article_id",
+                "files"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "article_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2f9ba788-2300-4586-9aa8-66b86cd6ee31",
+              "name": "List of files for the article",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "articles",
+                    ":article_id",
+                    "files"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "article_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 3968,\n    \"name\": \"string\",\n    \"size\": 3964,\n    \"computed_md5\": \"string\",\n    \"download_url\": \"https://WFKh.rpjJ+SVK-bJp8mh\",\n    \"is_link_only\": true\n  },\n  {\n    \"id\": 3973,\n    \"name\": \"string\",\n    \"size\": 3428,\n    \"computed_md5\": \"string\",\n    \"download_url\": \"http://LdVidvPhyjyygy.rpbsY-dIS9PUgbml6de5R2Cyf-QbKGsv9iKbGhZoeW\",\n    \"is_link_only\": true\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c958fe84-598d-4959-b5d0-d790ae055d91",
+          "name": "View a single article file",
+          "request": {
+            "name": "View a single article file",
+            "description": {},
+            "url": {
+              "path": [
+                "articles",
+                ":article_id",
+                "files",
+                ":file_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "article_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "file_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a90717a3-0154-4efb-95d7-d1699539667a",
+              "name": "File details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "articles",
+                    ":article_id",
+                    "files",
+                    ":file_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "article_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "file_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1367,\n  \"name\": \"string\",\n  \"size\": 1909,\n  \"computed_md5\": \"string\",\n  \"download_url\": \"http://LwKMBNvpTSOubAqAtaPFlNptvQwtybeCq.cbp8V6MbaQNCzsweAZxl581tlgBSDhMvBAFy5I5Px16t\",\n  \"is_link_only\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.figshare.com/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "9c8f8ecc-4cb5-4da2-b3b9-fcc4908e672f",
+    "name": "Figshare API (Open Access Repository) Articles API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Public, read-only subset of the Figshare v2 REST API, which powers the Open Access Te Herenga Waka—Victoria University of Wellington research repository. Only the public, unauthenticated endpoints and objects that the real Figshare OpenAPI description supports are included here. The full, authoritative specification is published by Figshare at https://docs.figshare.com/.\n\nContact Support:\n Name: Figshare Support",
+      "type": "text/plain"
+    }
+  }
+}
