@@ -131,6 +131,9 @@ apis:
   - type: x-json-ld-context
     url: json-ld/victoria-university-of-wellington-context.jsonld
 common:
+  - type: CapabilityMap
+    url: capabilities/victoria-university-of-wellington-capability-edges.yml
+    name: Victoria University of Wellington Business Capability Map
   - type: AgenticAccess
     url: agentic-access/victoria-university-of-wellington-agentic-access.yml
   - type: DomainSecurity
