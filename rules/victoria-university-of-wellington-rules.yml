@@ -1,49 +1,140 @@
-extends: [[spectral:oas, off]]
-formats: [oas3]
-documentationUrl: https://docs.figshare.com/
+# Spectral ruleset for Victoria University of Wellington's institution-operated contracts.
+# generated: '2026-08-30'
+# method: derived
+# source: openapi/_original/victoria-university-of-wellington-website-globalobject.yaml,
+#         openapi/_original/victoria-university-of-wellington-identity-federation.yaml
+# x-operator: institution
+#
+# Built from built-in Spectral functions only. These rules encode the gaps the live probes
+# actually found on the university's own surfaces — an undocumented endpoint with no version,
+# no error contract and a JSON body under a text/html Content-Type — so that re-running the
+# ruleset re-detects them rather than re-arguing them.
+extends:
+- spectral:oas
 rules:
-  vuw-info-contact:
-    description: Info object should include a contact.
+  vuw-info-contact-required:
+    description: Every contract must name a contactable owner at the institution.
+    message: '{{description}} — info.contact is missing.'
+    severity: error
     given: $.info
-    severity: warn
     then:
       field: contact
       function: truthy
-  vuw-info-license:
-    description: Info object should declare a license.
-    given: $.info
+
+  vuw-info-contact-email:
+    description: The institution's contract must carry an institutional email, not a vendor's.
+    message: '{{description}}'
     severity: warn
+    given: $.info.contact
     then:
-      field: license
-      function: truthy
-  vuw-server-figshare:
-    description: Server URL must point at the Figshare public v2 API.
-    given: $.servers[*].url
+      field: email
+      function: pattern
+      functionOptions:
+        match: '^[^@]+@(vuw|wgtn|victoria)\.ac\.nz$'
+
+  vuw-server-institution-domain:
+    description: >-
+      A contract saved under this institution must be based on a host the institution owns —
+      wgtn.ac.nz, vuw.ac.nz or victoria.ac.nz. This rule is the ruleset's whole reason for
+      existing: the previous profile of this repository was based on api.figshare.com.
+    message: '{{description}} — server url {{value}} is not on an institution domain.'
     severity: error
+    given: $.servers[*]
+    then:
+      field: url
+      function: pattern
+      functionOptions:
+        match: '^https://[a-z0-9.-]*(wgtn|vuw|victoria)\.ac\.nz'
+
+  vuw-operator-declared:
+    description: Every contract must declare who operates the thing it describes.
+    message: '{{description}} — x-operator is missing at the root.'
+    severity: error
+    given: $
+    then:
+      field: x-operator
+      function: truthy
+
+  vuw-operator-is-institution:
+    description: Only an institution-operated contract belongs in this repository.
+    message: '{{description}} — x-operator is {{value}}, expected "institution".'
+    severity: error
+    given: $.x-operator
     then:
       function: pattern
       functionOptions:
-        match: "^https://api\\.figshare\\.com/v2"
-  vuw-operation-operationid:
-    description: Every operation must declare an operationId.
-    given: $.paths[*][get,post]
+        match: '^institution$'
+
+  vuw-provenance-method-declared:
+    description: >-
+      An unmarked artifact is credited to the institution as if they published it. Every contract
+      must say how it came to exist.
+    message: '{{description}} — info.x-provenance.method is missing.'
     severity: error
+    given: $.info.x-provenance
+    then:
+      field: method
+      function: truthy
+
+  vuw-operation-id-required:
+    description: Every operation needs a stable operationId.
+    message: '{{description}}'
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete]
     then:
       field: operationId
       function: truthy
-  vuw-article-id-integer:
-    description: article_id path parameters should be typed as integers.
-    given: $.paths[*][*].parameters[?(@.name == 'article_id')].schema
+
+  vuw-operation-description-required:
+    description: Every operation needs a description, not just a summary.
+    message: '{{description}}'
     severity: warn
+    given: $.paths[*][get,post,put,patch,delete]
     then:
-      field: type
-      function: pattern
+      field: description
+      function: truthy
+
+  vuw-error-response-documented:
+    description: >-
+      Every operation must document at least one non-2xx response. The institution's own endpoints
+      return HTML 404s and bare 400s that no published reference describes.
+    message: '{{description}} — no 4xx response documented.'
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].responses
+    then:
+      function: schema
       functionOptions:
-        match: "^integer$"
-  vuw-200-response:
-    description: GET operations should document a 200 response.
-    given: $.paths[*].get.responses
+        schema:
+          type: object
+          anyOf:
+          - required: ['400']
+          - required: ['401']
+          - required: ['403']
+          - required: ['404']
+          - required: ['default']
+
+  vuw-json-media-type:
+    description: >-
+      A JSON payload should be described under a JSON media type. The global object endpoint serves
+      JSON as text/html; the contract records both, and this rule keeps the JSON one present.
+    message: '{{description}}'
     severity: warn
+    given: $.paths[*][get].responses['200'].content
     then:
-      field: "200"
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          anyOf:
+          - required: ['application/json']
+          - required: ['application/xml']
+          - required: ['application/samlmetadata+xml']
+
+  vuw-tags-declared:
+    description: Every contract must declare its tags at the root so the refine split is stable.
+    message: '{{description}}'
+    severity: error
+    given: $
+    then:
+      field: tags
       function: truthy

@@ -1,72 +1,133 @@
 {
   "@context": {
-    "@vocab": "https://schema.org/",
-    "vuw": "https://www.wgtn.ac.nz/ns#",
-    "figshare": "https://api.figshare.com/v2/ns#",
-    "dc": "http://purl.org/dc/elements/1.1/",
+    "@version": 1.1,
     "schema": "https://schema.org/",
-    "institution": {
-      "@id": "schema:CollegeOrUniversity"
+    "vuw": "https://www.wgtn.ac.nz/ns#",
+    "saml": "urn:oasis:names:tc:SAML:2.0:metadata#",
+    "shibmd": "urn:mace:shibboleth:metadata:1.0#",
+    "GlobalObject": "vuw:GlobalObject",
+    "baseUrls": {
+      "@id": "vuw:baseUrls",
+      "@container": "@set"
     },
-    "name": "schema:name",
-    "url": "schema:url",
-    "description": "schema:description",
-    "Article": {
-      "@id": "schema:Dataset",
-      "@context": {
-        "id": "schema:identifier",
-        "title": "schema:name",
-        "doi": "schema:identifier",
-        "handle": "schema:identifier",
-        "description": "schema:description",
-        "published_date": "schema:datePublished",
-        "modified_date": "schema:dateModified",
-        "created_date": "schema:dateCreated",
-        "url": "schema:url",
-        "views": "vuw:viewCount",
-        "downloads": "vuw:downloadCount",
-        "cites": "schema:citation",
-        "size": "schema:contentSize",
-        "version": "schema:version",
-        "license": "schema:license",
-        "authors": "schema:author",
-        "files": "schema:distribution",
-        "categories": "schema:about",
-        "tags": "schema:keywords"
-      }
+    "mainDomain": {
+      "@id": "schema:url",
+      "@type": "@id"
     },
-    "Author": {
-      "@id": "schema:Person",
-      "@context": {
-        "full_name": "schema:name",
-        "orcid_id": "schema:identifier",
-        "url_name": "schema:url"
-      }
+    "intranet": {
+      "@id": "vuw:intranet",
+      "@type": "@id"
     },
-    "ArticleFile": {
-      "@id": "schema:DataDownload",
-      "@context": {
-        "name": "schema:name",
-        "size": "schema:contentSize",
-        "computed_md5": "vuw:md5",
-        "download_url": "schema:contentUrl"
-      }
+    "cdnAssets": {
+      "@id": "vuw:cdnAssets",
+      "@type": "@id"
     },
-    "Category": {
-      "@id": "schema:DefinedTerm",
-      "@context": {
-        "title": "schema:name"
-      }
+    "cmsAssets": {
+      "@id": "vuw:cmsAssets",
+      "@type": "@id"
     },
-    "License": {
-      "@id": "schema:CreativeWork",
-      "@context": {
-        "name": "schema:name",
-        "url": "schema:url"
-      }
+    "courses": {
+      "@id": "vuw:coursesRoot",
+      "@type": "@id"
+    },
+    "explore": {
+      "@id": "vuw:exploreRoot",
+      "@type": "@id"
+    },
+    "logo": {
+      "@id": "schema:logo"
+    },
+    "title": "schema:name",
+    "alt": "schema:alternateName",
+    "href": {
+      "@id": "schema:url",
+      "@type": "@id"
+    },
+    "basePath": {
+      "@id": "vuw:basePath",
+      "@type": "@id"
+    },
+    "src": {
+      "@id": "vuw:src"
+    },
+    "widthToHeightRatio": {
+      "@id": "vuw:widthToHeightRatio",
+      "@type": "schema:Number"
+    },
+    "navigation": {
+      "@id": "vuw:navigation"
+    },
+    "root": {
+      "@id": "vuw:primaryNavigation",
+      "@container": "@list"
+    },
+    "alternate": {
+      "@id": "vuw:utilityNavigation",
+      "@container": "@list"
+    },
+    "footer": {
+      "@id": "vuw:footerNavigation",
+      "@container": "@list"
+    },
+    "content": "schema:name",
+    "apply": {
+      "@id": "vuw:applyAction",
+      "@type": "schema:Action"
+    },
+    "text": "schema:name",
+    "search": {
+      "@id": "schema:potentialAction",
+      "@type": "schema:SearchAction"
+    },
+    "action": {
+      "@id": "schema:target",
+      "@type": "@id"
+    },
+    "queryName": "vuw:queryParameterName",
+    "placeHolder": "vuw:placeholder",
+    "submitValue": "vuw:submitLabel",
+    "contacts": {
+      "@id": "schema:contactPoint",
+      "@type": "schema:ContactPoint"
+    },
+    "tel": "schema:telephone",
+    "mail": "schema:email",
+    "emergency": "vuw:emergencyTelephone",
+    "copyright": "schema:copyrightNotice",
+    "entityID": {
+      "@id": "saml:entityID",
+      "@type": "@id"
+    },
+    "IDPSSODescriptor": "saml:IDPSSODescriptor",
+    "SingleSignOnService": {
+      "@id": "saml:SingleSignOnService",
+      "@container": "@set"
+    },
+    "SingleLogoutService": {
+      "@id": "saml:SingleLogoutService",
+      "@container": "@set"
+    },
+    "NameIDFormat": {
+      "@id": "saml:NameIDFormat",
+      "@container": "@set"
+    },
+    "Binding": {
+      "@id": "saml:Binding",
+      "@type": "@id"
+    },
+    "Location": {
+      "@id": "saml:Location",
+      "@type": "@id"
+    },
+    "scope": "shibmd:Scope",
+    "x-provenance": {
+      "generated": "2026-08-30",
+      "method": "derived",
+      "source": [
+        "openapi/_original/victoria-university-of-wellington-website-globalobject.yaml",
+        "openapi/_original/victoria-university-of-wellington-identity-federation.yaml"
+      ],
+      "note": "Generated by API Evangelist by mapping the probed contracts onto schema.org and the SAML metadata vocabulary. Te Herenga Waka publishes no JSON-LD context for these endpoints; the university's own JSON-LD use is schema.org Course markup embedded in course pages."
     }
-  },
-  "@type": "CollegeOrUniversity",
-  "name": "Te Herenga Waka—Victoria University of Wellington",
-  "url": "https://www.wgtn.ac.nz/"
+  }
 }
