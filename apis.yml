@@ -184,6 +184,12 @@ apis:
   - JSON
   - CMS
   - Undocumented
+  - Institution-Operated
+  tags_raw:
+  - Website
+  - JSON
+  - CMS
+  - Undocumented
   - Institution Operated
   properties:
   - type: OpenAPI
@@ -218,6 +224,13 @@ apis:
   humanURL: https://tuakiri.ac.nz/
   baseURL: https://idp.vuw.ac.nz/idp/shibboleth
   tags:
+  - Identity Federation
+  - SAML
+  - Shibboleth
+  - Tuakiri
+  - eduGAIN
+  - Institution-Operated
+  tags_raw:
   - Identity Federation
   - SAML
   - Shibboleth
@@ -261,6 +274,15 @@ apis:
   humanURL: https://ir.wgtn.ac.nz/
   baseURL: https://ir.wgtn.ac.nz/
   tags:
+  - Research Repository
+  - Institutional Repository
+  - OAI-PMH
+  - DSpace
+  - OpenSearch
+  - Signposting
+  - Self-Hosted
+  - Institution-Operated
+  tags_raw:
   - Research Repository
   - Institutional Repository
   - OAI-PMH
@@ -416,6 +438,13 @@ apis:
   humanURL: https://www.wgtn.ac.nz/students/tools-and-help
   baseURL: https://auth-eis.vuw.ac.nz/
   tags:
+  - Identity
+  - Single Sign-On
+  - SAML
+  - WSO2
+  - Self-Hosted
+  - Institution-Operated
+  tags_raw:
   - Identity
   - Single Sign-On
   - SAML
