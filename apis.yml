@@ -66,7 +66,7 @@ accessModel:
   - plans
   generated: '2026-08-30'
   method: probed
-position: Consumer
+position: Consuming
 access: 3rd-Party
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/victoria-university-of-wellington.png
 url: https://raw.githubusercontent.com/api-evangelist/victoria-university-of-wellington/refs/heads/main/apis.yml
