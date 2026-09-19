@@ -187,6 +187,13 @@ apis:
   - OAI-PMH
   - DataCite
   - Figshare
+  - Tenants
+  tags_raw:
+  - Research Repository
+  - Open Access
+  - OAI-PMH
+  - DataCite
+  - Figshare
   - Tenant
   properties:
   - type: Documentation
@@ -221,6 +228,15 @@ apis:
   - Primo
   - Alma
   - Ex Libris
+  - Tenants
+  tags_raw:
+  - Library
+  - Discovery
+  - SRU
+  - MARCXML
+  - Primo
+  - Alma
+  - Ex Libris
   - Tenant
   properties:
   - type: Documentation
@@ -243,6 +259,12 @@ apis:
   humanURL: https://www.wgtn.ac.nz/teaching-support/teaching-with-technology
   baseURL: https://nuku.wgtn.ac.nz/
   tags:
+  - Learning Management
+  - Canvas
+  - Instructure
+  - LTI
+  - Tenants
+  tags_raw:
   - Learning Management
   - Canvas
   - Instructure
@@ -271,6 +293,11 @@ apis:
   - Research Information
   - Symplectic
   - Elements
+  - Tenants
+  tags_raw:
+  - Research Information
+  - Symplectic
+  - Elements
   - Tenant
   properties:
   - type: Documentation
@@ -294,7 +321,7 @@ apis:
   baseURL: https://auth-eis.vuw.ac.nz/
   tags:
   - Identity
-  - Single Sign-On
+  - SSO
   - SAML
   - WSO2
   - Self-Hosted
@@ -330,6 +357,12 @@ apis:
   - Registrar
   - Banner
   - Ellucian
+  - Tenants
+  tags_raw:
+  - Student Information System
+  - Registrar
+  - Banner
+  - Ellucian
   - Tenant
   properties:
   - type: CourseCatalog
@@ -352,6 +385,12 @@ apis:
   - OpenID Connect
   - SAML
   - Microsoft Entra ID
+  - Tenants
+  tags_raw:
+  - Identity Federation
+  - OpenID Connect
+  - SAML
+  - Microsoft Entra ID
   - Tenant
   properties:
   - type: x-openid-configuration
@@ -369,6 +408,8 @@ apis:
   humanURL: https://www.wgtn.ac.nz/
   baseURL: https://www.wgtn.ac.nz/api/globalobject
   tags:
+  - Research Repository
+  tags_raw:
   - ResearchRepository
   properties:
   - type: OpenAPI
@@ -415,6 +456,8 @@ apis:
   humanURL: https://www.wgtn.ac.nz/
   baseURL: https://www.wgtn.ac.nz/api/globalobject
   tags:
+  - Websites
+  tags_raw:
   - Website
   properties:
   - type: OpenAPI
