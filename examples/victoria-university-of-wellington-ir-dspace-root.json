@@ -1,0 +1,206 @@
+{
+  "dspaceUI" : "https://ir.wgtn.ac.nz",
+  "dspaceName" : "Institutional Repository at Victoria University of Wellington",
+  "dspaceServer" : "https://ir.wgtn.ac.nz/server",
+  "dspaceVersion" : "DSpace 7.6.7",
+  "type" : "root",
+  "_links" : {
+    "actuator" : {
+      "href" : "https://ir.wgtn.ac.nz/server/actuator"
+    },
+    "authn" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api/authn"
+    },
+    "authorizations" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api/authz/authorizations"
+    },
+    "bitstreamformats" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api/core/bitstreamformats"
+    },
+    "bitstreams" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api/core/bitstreams"
+    },
+    "browses" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api/discover/browses"
+    },
+    "bulkaccessconditionoptions" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api/config/bulkaccessconditionoptions"
+    },
+    "bundles" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api/core/bundles"
+    },
+    "claimedtasks" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api/workflow/claimedtasks"
+    },
+    "claimedtasks-search" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api/workflow/claimedtasks/search"
+    },
+    "collections" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api/core/collections"
+    },
+    "communities" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api/core/communities"
+    },
+    "discover" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api/discover"
+    },
+    "dso" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api/dso/find{?uuid}",
+      "templated" : true
+    },
+    "entitytypes" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api/core/entitytypes"
+    },
+    "eperson-registration" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api/eperson/registrations"
+    },
+    "epersons" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api/eperson/epersons"
+    },
+    "externalsources" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api/integration/externalsources"
+    },
+    "features" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api/authz/features"
+    },
+    "feedbacks" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api/tools/feedbacks"
+    },
+    "groups" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api/eperson/groups"
+    },
+    "identifiers" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api/pid/identifiers"
+    },
+    "itemrequests" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api/tools/itemrequests"
+    },
+    "items" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api/core/items"
+    },
+    "itemtemplates" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api/core/itemtemplates"
+    },
+    "metadatafields" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api/core/metadatafields"
+    },
+    "metadataschemas" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api/core/metadataschemas"
+    },
+    "oidc" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api/authn"
+    },
+    "pid" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api/pid/find{?id}",
+      "templated" : true
+    },
+    "pooltasks" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api/workflow/pooltasks"
+    },
+    "pooltasks-search" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api/workflow/pooltasks/search"
+    },
+    "processes" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api/system/processes"
+    },
+    "properties" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api/config/properties"
+    },
+    "registrations" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api/eperson/registrations"
+    },
+    "relationships" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api/core/relationships"
+    },
+    "relationshiptypes" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api/core/relationshiptypes"
+    },
+    "resourcepolicies" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api/authz/resourcepolicies"
+    },
+    "resourcepolicies-search" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api/authz/resourcepolicies/search"
+    },
+    "scripts" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api/system/scripts"
+    },
+    "self" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api"
+    },
+    "sites" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api/core/sites"
+    },
+    "statistics" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api/statistics"
+    },
+    "submissionaccessoptions" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api/config/submissionaccessoptions"
+    },
+    "submissioncclicenseUrls" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api/config/submissioncclicenseUrls"
+    },
+    "submissioncclicenseUrls-search" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api/config/submissioncclicenseUrls/search"
+    },
+    "submissioncclicenses" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api/config/submissioncclicenses"
+    },
+    "submissiondefinitions" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api/config/submissiondefinitions"
+    },
+    "submissionforms" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api/config/submissionforms"
+    },
+    "submissionsections" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api/config/submissionsections"
+    },
+    "submissionuploads" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api/config/submissionuploads"
+    },
+    "subscriptions" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api/core/subscriptions"
+    },
+    "subscriptions-search" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api/core/subscriptions/search"
+    },
+    "supervisionorders" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api/core/supervisionorders"
+    },
+    "systemwidealerts" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api/system/systemwidealerts"
+    },
+    "usagereports" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api/statistics/usagereports"
+    },
+    "versionhistories" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api/versioning/versionhistories"
+    },
+    "versions" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api/versioning/versions"
+    },
+    "vocabularies" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api/submission/vocabularies"
+    },
+    "vocabularyEntryDetails" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api/submission/vocabularyEntryDetails"
+    },
+    "vocabularyEntryDetails-search" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api/submission/vocabularyEntryDetails/search"
+    },
+    "workflowactions" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api/config/workflowactions"
+    },
+    "workflowdefinitions" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api/config/workflowdefinitions"
+    },
+    "workflowitems" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api/workflow/workflowitems"
+    },
+    "workflowsteps" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api/config/workflowsteps"
+    },
+    "workspaceitems" : {
+      "href" : "https://ir.wgtn.ac.nz/server/api/submission/workspaceitems"
+    }
+  }
+}

@@ -1,0 +1,90 @@
+specification: API Commons Errors
+specificationVersion: '0.1'
+provider: Victoria University of Wellington
+providerId: victoria-university-of-wellington
+generated: '2026-08-30'
+method: derived
+probe_date: '2026-08-30'
+probe_note: >-
+  Written by API Evangelist from live, unauthenticated probes. Every status code and payload
+  quoted below was observed on the date above; nothing here was published by the institution.
+source: live probes, 2026-08-30
+description: >-
+  Observed error behaviour across Te Herenga Waka—Victoria University of Wellington's surfaces. The
+  institution publishes no error reference; every entry below is a status code and body actually
+  returned to a probe on 2026-08-30. Two of these are the kind of response that gets misread as a
+  finding about the institution, so they are written down explicitly.
+errors:
+- surface: Website Global Object
+  operator: institution
+  status: 404
+  media_type: text/html
+  detail: >-
+    An unknown path under www.wgtn.ac.nz returns HTTP 404 with a full ~48KB branded HTML error
+    page. The status code is correct — this is a real 404, not a soft 200 — but the body is a web
+    page, so a client expecting JSON gets HTML on the error path.
+- surface: Website Global Object
+  operator: institution
+  status: 200
+  media_type: text/html; charset=utf-8
+  detail: >-
+    NOTE ON THE SUCCESS PATH: the endpoint returns a JSON body under a text/html Content-Type. A
+    strict client that content-negotiates or validates the media type will reject a valid response.
+- surface: Website (.well-known)
+  operator: institution
+  status: 421
+  media_type: text/html
+  detail: >-
+    https://www.wgtn.ac.nz/.well-known/security.txt returns HTTP 421 Misdirected Request from the
+    edge rather than 404. No RFC 9116 security.txt is published.
+- surface: Shibboleth SSO endpoint
+  operator: institution
+  status: 400
+  media_type: text/html
+  detail: >-
+    /idp/profile/SAML2/Redirect/SSO returns HTTP 400 to a request carrying no SAMLRequest. Correct
+    Shibboleth behaviour for an unbound request, and not an outage.
+- surface: Institutional repository — DSpace REST items
+  operator: institution
+  status: 401
+  media_type: application/json
+  detail: >-
+    /server/api/core/items returns a structured JSON error —
+    {"timestamp":"…","status":401,"error":"Unauthorized","message":"Authentication is required",
+    "path":"/server/api/core/items"} — while the sibling discovery, communities and collections
+    endpoints on the same host answer anonymously with HTTP 200. The gate is on item enumeration
+    only, and OAI-PMH remains an open path to the same records.
+- surface: Institutional repository — DSpace REST config
+  operator: institution
+  status: 405
+  media_type: application/json
+  detail: >-
+    /server/api/config/properties returns HTTP 405 Method Not Allowed to a GET. Recorded because
+    405 on a GET reads as a broken endpoint; it is DSpace's normal behaviour for that path.
+- surface: Institutional repository — OAI-PMH
+  operator: institution
+  status: 200
+  media_type: text/xml
+  detail: >-
+    NOTE ON THE ERROR PATH: OAI-PMH signals protocol errors inside an HTTP 200 response, in an
+    <error> element with a code such as badVerb or idDoesNotExist. A client that checks only the
+    status code will treat every malformed request as a success. The body must be read.
+- surface: Open Access repository
+  operator: tenant
+  status: 202
+  media_type: text/html
+  detail: >-
+    openaccess.wgtn.ac.nz returns HTTP 202 with header x-amzn-waf-action "challenge" and a
+    JavaScript challenge body to a non-browser client. THIS IS A BOT CHALLENGE, NOT A FAILURE — the
+    repository is live. A crawler that reads only the status code will record a success with an
+    empty body; one that reads only the body will record a dead host. Both readings are wrong.
+- surface: Nuku learning management (Canvas)
+  operator: tenant
+  status: 401
+  media_type: application/json
+  detail: '{"status":"unauthenticated","errors":[{"message":"user authorisation required"}]}'
+- surface: Symplectic Elements
+  operator: tenant
+  status: 401
+  media_type: text/html
+  detail: HTTP 401 with a 135-byte body. Live host, institutional credentials required.

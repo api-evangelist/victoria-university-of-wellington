@@ -1,0 +1,234 @@
+openapi: 3.0.3
+info:
+  title: Te Herenga Waka Website Global Object
+  description: |-
+    An undocumented but public, keyless JSON endpoint served by Te Herenga Waka—Victoria University of Wellington's own website (Squiz Matrix CMS) at https://www.wgtn.ac.nz/api/globalobject. It returns the global site object the university's front end is built from: canonical base URLs (main domain, intranet, CDN assets, courses, explore), the brand logo asset manifest at every breakpoint, the primary/alternate/footer navigation trees, the apply call-to-action, the public and intranet search form contracts, and the institution's public contact numbers and address.
+    THIS CONTRACT WAS NOT PUBLISHED BY THE UNIVERSITY. It was derived by API Evangelist from a live, unauthenticated probe of the endpoint on 2026-08-30 (HTTP 200, Access-Control-Allow-Origin: *, Access-Control-Allow-Methods: GET, HEAD, OPTIONS). The university publishes no developer documentation, no versioning policy and no support channel for it, and it may change or be withdrawn without notice. It is recorded here because it is one of only two machine-readable surfaces the institution itself operates, as opposed to the vendor platforms it buys.
+    Note that the endpoint returns a JSON body under a `text/html; charset=utf-8` Content-Type.
+
+    No credential of any kind is issued or accepted on this endpoint; it was called anonymously and returned a full response. The empty `security` array states that explicitly rather than leaving it unsaid.
+  version: '2026-08-30'
+  contact:
+    name: Victoria University of Wellington
+    url: https://www.wgtn.ac.nz/about/contacts
+    email: info@vuw.ac.nz
+  termsOfService: https://www.wgtn.ac.nz/site-info
+  x-provenance:
+    generated: '2026-08-30'
+    method: probed
+    source: https://www.wgtn.ac.nz/api/globalobject
+    note: Schema derived from the live response body. No vendor contract was copied; no field was invented.
+      Fields present in the response but not understood are typed, not described.
+x-operator: institution
+servers:
+- url: https://www.wgtn.ac.nz
+  description: Te Herenga Waka—Victoria University of Wellington public website
+tags:
+- name: Website
+  description: Public website configuration served by the university's own CMS.
+paths:
+  /api/globalobject:
+    get:
+      operationId: getGlobalObject
+      summary: Retrieve the site-wide global object
+      description: Returns the global site configuration object used by every page on www.wgtn.ac.nz.
+        No authentication, no API key and no rate-limit header are present on the response. CORS is open
+        to all origins.
+      tags:
+      - Website
+      responses:
+        '200':
+          description: The global site object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GlobalObject'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/GlobalObject'
+        '404':
+          description: Endpoint not found. The university's CMS returns a full HTML 404 page.
+          content:
+            text/html:
+              schema:
+                type: string
+components:
+  schemas:
+    GlobalObject:
+      type: object
+      description: Global site configuration for the Te Herenga Waka public website.
+      properties:
+        baseUrls:
+          $ref: '#/components/schemas/BaseUrls'
+        logo:
+          $ref: '#/components/schemas/Logo'
+        navigation:
+          $ref: '#/components/schemas/Navigation'
+        apply:
+          $ref: '#/components/schemas/CallToAction'
+        search:
+          $ref: '#/components/schemas/SearchConfig'
+        contacts:
+          $ref: '#/components/schemas/Contacts'
+        copyright:
+          type: string
+          description: HTML-escaped copyright line for the institution.
+        debug:
+          type: string
+          description: CMS debug flag. Observed empty on the public surface.
+    BaseUrls:
+      type: object
+      description: Canonical base URLs the front end composes links from.
+      properties:
+        mainDomain:
+          type: string
+          format: uri
+        intranet:
+          type: string
+          format: uri
+        cdnAssets:
+          type: string
+          format: uri
+        cmsAssets:
+          type: string
+          format: uri
+        courses:
+          type: string
+          format: uri
+          description: Root of the public course catalogue.
+        explore:
+          type: string
+          format: uri
+          description: Root of the study-area and programme explorer.
+    Logo:
+      type: object
+      properties:
+        title:
+          type: string
+        href:
+          type: string
+          format: uri
+        alt:
+          type: string
+        assets:
+          $ref: '#/components/schemas/LogoAssets'
+    LogoAssets:
+      type: object
+      description: Logo image manifest. Each breakpoint key carries a source path relative to `basePath`
+        and the intrinsic width-to-height ratio.
+      properties:
+        basePath:
+          type: string
+          format: uri
+        desktop:
+          $ref: '#/components/schemas/LogoAsset'
+        desktopBrand:
+          $ref: '#/components/schemas/LogoAsset'
+        mobile:
+          $ref: '#/components/schemas/LogoAsset'
+        tablet:
+          $ref: '#/components/schemas/LogoAsset'
+        print:
+          $ref: '#/components/schemas/LogoAsset'
+        icon:
+          $ref: '#/components/schemas/LogoAsset'
+        green:
+          type: object
+          description: Alternate green-brand variants, keyed by the same breakpoint names.
+          additionalProperties:
+            $ref: '#/components/schemas/LogoAsset'
+    LogoAsset:
+      type: object
+      properties:
+        src:
+          type: string
+        widthToHeightRatio:
+          type: number
+    Navigation:
+      type: object
+      properties:
+        root:
+          type: array
+          description: Primary audience navigation.
+          items:
+            $ref: '#/components/schemas/NavItem'
+        alternate:
+          type: array
+          description: Secondary utility navigation.
+          items:
+            $ref: '#/components/schemas/NavItem'
+        footer:
+          type: array
+          description: Footer navigation.
+          items:
+            $ref: '#/components/schemas/NavItem'
+    NavItem:
+      type: object
+      properties:
+        href:
+          type: string
+          format: uri
+        class:
+          type: string
+        content:
+          type: string
+          description: Link label as rendered.
+        type:
+          type: string
+          description: Item kind. `link` observed.
+    CallToAction:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+        text:
+          type: string
+    SearchConfig:
+      type: object
+      description: Form contracts for the public and intranet site search.
+      properties:
+        public:
+          $ref: '#/components/schemas/SearchForm'
+        intranet:
+          $ref: '#/components/schemas/SearchForm'
+    SearchForm:
+      type: object
+      properties:
+        action:
+          type: string
+          description: Form action path or URL the query is submitted to.
+        queryName:
+          type: string
+          description: Query-string parameter name carrying the search term.
+        placeHolder:
+          type: string
+        submitValue:
+          type: string
+        new:
+          type: object
+          description: Replacement copy for the redesigned search widget.
+          properties:
+            placeHolder:
+              type: string
+    Contacts:
+      type: object
+      properties:
+        tel:
+          type: object
+          properties:
+            main:
+              type: string
+            mainInternational:
+              type: string
+            emergency:
+              type: string
+            emergencyExtension:
+              type: string
+        mail:
+          type: object
+          properties:
+            main:
+              type: string
+              format: email
+security: []

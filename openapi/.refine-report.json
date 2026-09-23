@@ -1,0 +1,32 @@
+{
+  "provider": "victoria-university-of-wellington",
+  "sources": [
+    "_original/victoria-university-of-wellington-identity-federation-openapi.yml",
+    "_original/victoria-university-of-wellington-institutional-repository-openapi.yml",
+    "_original/victoria-university-of-wellington-website-globalobject-openapi.yml"
+  ],
+  "outputs": [
+    "victoria-university-of-wellington-identityfederation-api-openapi.yml",
+    "victoria-university-of-wellington-researchrepository-api-openapi.yml",
+    "victoria-university-of-wellington-website-api-openapi.yml"
+  ],
+  "archived": [
+    "deleted 1 superseded output(s) from the previous generation"
+  ],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "3 archived document(s) dropped as subsets of other archived documents",
+    "sourced from openapi/_original/ (3 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "superseded outputs removed: victoria-university-of-wellington-identity-federation-api-openapi.yml",
+    "apis.yml register: written (+1 apis, 10 total)"
+  ],
+  "skipped": [
+    "_original/victoria-university-of-wellington-website-globalobject.yaml: archived document superseded by a larger archived document",
+    "_original/victoria-university-of-wellington-institutional-repository.yaml: archived document superseded by a larger archived document",
+    "_original/victoria-university-of-wellington-identity-federation.yaml: archived document superseded by a larger archived document",
+    "victoria-university-of-wellington-identity-federation-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "victoria-university-of-wellington-researchrepository-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "victoria-university-of-wellington-website-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
+}

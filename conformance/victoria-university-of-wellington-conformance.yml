@@ -1,0 +1,154 @@
+specification: API Evangelist Conformance
+specificationVersion: '0.1'
+provider: Victoria University of Wellington
+providerId: victoria-university-of-wellington
+regime: education
+generated: '2026-08-30'
+method: derived
+probe_date: '2026-08-30'
+probe_note: >-
+  Written by API Evangelist from live, unauthenticated probes. Every status code and payload
+  quoted below was observed on the date above; nothing here was published by the institution.
+source: live probes of institution and tenant hosts, 2026-08-30 (re-probed and extended 2026-08-30)
+description: >-
+  Education-regime domain-standard conformance for Te Herenga Waka—Victoria University of Wellington.
+  Reward-only: a standard is listed here ONLY where a live probe returned the standard's own payload.
+  Standards in the education regime that were probed and NOT found are recorded under `not_found` so
+  the absence is a measurement rather than a silence.
+standards:
+- standard: saml
+  status: conformant
+  operator: institution
+  evidence:
+    url: https://idp.vuw.ac.nz/idp/shibboleth
+    status: 200
+    detail: >-
+      Returns a SAML 2.0 EntityDescriptor for entityID https://idp.vuw.ac.nz/idp/shibboleth with an
+      IDPSSODescriptor advertising protocolSupportEnumeration urn:oasis:names:tc:SAML:2.0:protocol,
+      SingleSignOnService bindings HTTP-POST, HTTP-Redirect and SOAP/ECP, SingleLogoutService
+      bindings HTTP-POST and HTTP-Redirect, and persistent + transient NameID formats.
+  location: openapi/victoria-university-of-wellington-identity-federation-openapi.yml#/paths/~1idp~1shibboleth/get
+- standard: shibboleth
+  status: conformant
+  operator: institution
+  evidence:
+    url: https://directory.tuakiri.ac.nz/metadata/tuakiri-metadata-signed.xml
+    status: 200
+    detail: >-
+      The Tuakiri (New Zealand Access Federation) signed metadata aggregate carries the VUW
+      EntityDescriptor with a shibmd:Scope of vuw.ac.nz, mdrpi:RegistrationInfo naming
+      registrationAuthority https://tuakiri.ac.nz/ with registrationInstant 2012-06-26T02:47:57Z,
+      the REFEDS Research & Scholarship entity category
+      (http://refeds.org/category/research-and-scholarship) and a REFEDS Sirtfi assurance
+      certification (https://refeds.org/sirtfi). Shibboleth IdP software is confirmed by the
+      urn:mace:shibboleth:metadata:1.0 namespace and the /idp/profile/SAML2/* endpoint layout.
+  location: openapi/victoria-university-of-wellington-identity-federation-openapi.yml#/paths/~1idp~1shibboleth/get
+- standard: oai-pmh
+  status: conformant
+  operator: institution
+  evidence:
+    url: https://ir.wgtn.ac.nz/oai/request?verb=Identify
+    status: 200
+    detail: >-
+      THE INSTITUTION RUNS ITS OWN OAI-PMH BASE URL. Te Herenga Waka self-hosts a DSpace 7.6.7
+      institutional repository at ir.wgtn.ac.nz - the host is under the university's own
+      registrable domain, carries no CNAME, and resolves directly to 130.195.21.54 in the
+      university's own address space. verb=Identify returns protocolVersion 2.0, repositoryName
+      "Institutional Repository at Victoria University of Wellington", adminEmail
+      library-systems@vuw.ac.nz, repositoryIdentifier ir.wgtn.ac.nz, deletedRecord transient and
+      granularity YYYY-MM-DDThh:mm:ssZ. verb=ListMetadataFormats advertises twelve prefixes
+      (oai_dc, qdc, dim, xoai, mets, mods, marc, rdf, ore, didl, etdms, uketd_dc);
+      verb=ListIdentifiers with oai_dc reports completeListSize 23150 across sets including
+      ResearchArchive-Te Puna Rangahau, RestrictedArchive-Te Puna Rangahau, the Stout Literary
+      Archive and Exam Papers. Unauthenticated, keyless. This is the strongest domain-standard
+      conformance in the profile that is unambiguously the institution's own operation.
+  location: openapi/victoria-university-of-wellington-institutional-repository-openapi.yml#/paths/~1oai~1request/get
+- standard: oai-pmh
+  status: conformant
+  operator: tenant
+  evidence:
+    url: https://api.figshare.com/v2/oai?verb=ListIdentifiers&metadataPrefix=oai_dc&set=portal_771
+    status: 200
+    detail: >-
+      A SECOND, VENDOR-HOSTED OAI-PMH deployment, distinct from the institution's own endpoint above.
+      OAI-PMH 2.0 ListIdentifiers over the institution's own Figshare portal set portal_771 returns
+      VUW records (e.g. oai:figshare.com:article/33386875, datestamp 2026-08-29). The protocol
+      endpoint is Figshare's and is shared by every Figshare customer; the SET is the institution's.
+      Recorded as tenant, not institution — the university operates the repository, Figshare
+      operates the interface. The VUW Library's own httpd proxy for this set
+      (github.com/VUW-Library/figshare-oaipmh-proxy) is institution-written but is not publicly
+      deployed at a discoverable address.
+  location: apis.yml#/apis/open-access-repository-figshare
+- standard: datacite
+  status: conformant
+  operator: tenant
+  evidence:
+    url: https://api.datacite.org/clients/figshare.vuw
+    status: 200
+    detail: >-
+      DataCite repository account FIGSHARE.VUW, name "Victoria University of Wellington",
+      clientType repository, created 2021-06-10, isActive true, registered domains
+      wellington.figshare.com and openaccess.wgtn.ac.nz. 4,301 DOIs minted under the account
+      (api.datacite.org/dois?client-id=figshare.vuw), example 10.25455/wgtn.33350169. The DOI
+      registration is the institution's; the minting API is DataCite's.
+  location: apis.yml#/apis/open-access-repository-figshare
+- standard: datacite
+  status: present
+  operator: institution
+  evidence:
+    url: https://ir.wgtn.ac.nz/server/signposting/links/2c799dae-2a2d-4113-912e-91f8bbf9b46a
+    status: 200
+    detail: >-
+      The self-hosted repository serves FAIR Signposting link sets from its own host, and the
+      `describedby` relation resolves to a DataCite metadata document
+      (type application/vnd.datacite.datacite+xml) alongside `cite-as` (a Handle), `item` (the PDF
+      bitstream), `license`, `linkset` (application/linkset and application/linkset+json) and
+      schema.org `type` relations. Marked `present`, not `conformant`: the institution serves
+      DataCite-typed metadata for its own records from its own infrastructure, but the DataCite
+      minting account recorded below is Figshare-side. Signposting itself is not in the education
+      regime's standards list and is therefore not claimed for score - it is recorded because it is
+      a real, machine-actionable, institution-operated interface.
+  location: openapi/victoria-university-of-wellington-institutional-repository-openapi.yml#/paths/~1server~1signposting~1links~1{uuid}/get
+- standard: lti
+  status: present
+  operator: tenant
+  evidence:
+    url: https://nuku.wgtn.ac.nz/api/v1/courses
+    status: 401
+    detail: >-
+      Nuku, the university's learning-management system, is an Instructure Canvas tenant
+      (nuku.wgtn.ac.nz CNAMEs to wgtn-vanity.instructure.com) and its REST API answers
+      {"status":"unauthenticated"} rather than 404, confirming a live Canvas deployment. Canvas
+      implements IMS LTI 1.3 as a platform. Marked `present`, not `conformant`: the LTI platform
+      conformance belongs to Instructure's product, and no VUW-specific LTI registration or tool
+      configuration is publicly readable.
+  location: apis.yml#/apis/nuku-canvas-lms
+not_found:
+- standard: scim
+  detail: >-
+    UNREADABLE, NOT ABSENT. The university self-hosts a WSO2 Identity Server at auth-eis.vuw.ac.nz
+    (130.195.13.55, no CNAME), and WSO2 IS ships SCIM 2.0 as standard — but /scim2/ServiceProviderConfig
+    returns HTTP 403 from a web application firewall ("Request forbidden by administrative rules"),
+    as do its OIDC discovery, SAML2 metadata and admin-service endpoints. No SCIM conformance is
+    claimed because none could be read. Recording this as a flat absence would be wrong.
+- standard: oneroster
+  detail: No IMS OneRoster endpoint found; OneRoster adoption is K-12-weighted and was not expected here.
+- standard: ed-fi
+  detail: No Ed-Fi ODS/API surface; Ed-Fi is a US K-12 standard with no New Zealand tertiary footprint.
+- standard: caliper
+  detail: >-
+    Canvas can emit IMS Caliper analytics events, but no VUW Caliper endpoint, event store or
+    sensor configuration is publicly readable.
+- standard: qti
+  detail: No public QTI item bank or assessment interchange surface found.
+- standard: orcid
+  detail: >-
+    VUW Research Computing publishes an ORCID harvesting script
+    (github.com/vuw-research-computing/ORCIDWorks) that consumes the ORCID public API for
+    institutionally affiliated authors, and the Symplectic Elements deployment at
+    elements.wgtn.ac.nz is ORCID-integrable — but that is CONSUMPTION of ORCID, not an
+    ORCID-conformant interface the institution serves. No credit claimed.
+- standard: crossref
+  detail: >-
+    No Crossref member account or Crossref-deposited prefix attributable to the institution was
+    found; VUW mints through DataCite, recorded above.

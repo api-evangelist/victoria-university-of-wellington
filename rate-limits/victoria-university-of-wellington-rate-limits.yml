@@ -6,6 +6,8 @@ providerId: victoria-university-of-wellington
 created: '2026-06-03'
 modified: '2026-06-03'
 reconciled: false
+method: generated
+source: apis.yml + live probes
 tags:
 - Education
 - Higher Education
@@ -13,7 +15,7 @@ tags:
 - Rate Limiting
 description: >-
   Victoria University of Wellington does not publish a unified public rate-limit table across its APIs. Open
-  metadata and harvesting endpoints (OAI-PMH, IIIF, library) may throttle large-scale
+  metadata and harvesting endpoints (OAI-PMH, SRU, library discovery) may throttle large-scale
   or automated harvesting; clients should harvest politely, honor Retry-After, and
   contact the relevant service for bulk access.
 notes: Confirm per-service limits with each API's documentation; harvest responsibly.

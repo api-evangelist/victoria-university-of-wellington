@@ -1,0 +1,126 @@
+openapi: 3.2.0
+info:
+  title: Te Herenga Waka Shibboleth Identity Provider Identity…
+  description: Te Herenga Waka—Victoria University of Wellington operates its own SAML 2.0 Identity Provider (Shibboleth) at https://idp.vuw.ac.nz, entityID `https://idp.vuw.ac.nz/idp/shibboleth`, scope `vuw.ac.nz`.
+  version: '2026-08-30'
+  contact:
+    name: Victoria University of Wellington
+    url: https://www.wgtn.ac.nz/about/contacts
+    email: info@vuw.ac.nz
+  x-provenance:
+    generated: '2026-08-30'
+    method: derived
+    source: openapi/_original/victoria-university-of-wellington-identity-federation.yaml
+    note: Endpoint, entityID, scope, bindings, NameID formats, attribute set, entity categories and registration authority all read from the live metadata document and from the Tuakiri signed federation aggregate. Nothing inferred.
+servers:
+- url: https://idp.vuw.ac.nz
+  description: Victoria University of Wellington Shibboleth Identity Provider
+security: []
+tags:
+- name: Identity Federation
+  description: SAML 2.0 identity federation surfaces operated by the institution.
+paths:
+  /idp/shibboleth:
+    get:
+      operationId: getIdpSamlMetadata
+      summary: Retrieve the institution's SAML 2.0 IdP metadata
+      description: Returns the SAML 2.0 `EntityDescriptor` for entityID `https://idp.vuw.ac.nz/idp/shibboleth`, including the IDPSSODescriptor, signing and encryption key descriptors (CN=idp.vuw.ac.nz), single sign-on and single logout endpoints, supported NameID formats and the released attribute set. Unauthenticated. The document carries Shibboleth's standard "example metadata" preamble; the authoritative, signed copy of this entity for federation consumers is the Tuakiri aggregate.
+      tags:
+      - Identity Federation
+      responses:
+        '200':
+          description: SAML 2.0 metadata document.
+          content:
+            application/samlmetadata+xml:
+              schema:
+                $ref: '#/components/schemas/EntityDescriptor'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/EntityDescriptor'
+  /idp/profile/SAML2/Redirect/SSO:
+    get:
+      operationId: samlRedirectSso
+      summary: SAML 2.0 HTTP-Redirect single sign-on endpoint
+      description: 'The SAML2 HTTP-Redirect SSO binding advertised in the IdP metadata. It is not a data API: it expects a signed `SAMLRequest` from a registered service provider and returns HTTP 400 to an unbound request, which is the correct behaviour and was the observed response.'
+      tags:
+      - Identity Federation
+      parameters:
+      - name: SAMLRequest
+        in: query
+        required: true
+        description: Deflated, base64-encoded SAML 2.0 AuthnRequest.
+        schema:
+          type: string
+      - name: RelayState
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: SigAlg
+        in: query
+        required: false
+        schema:
+          type: string
+          format: uri
+      - name: Signature
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Authentication flow response for a valid request from a registered SP.
+          content:
+            text/html:
+              schema:
+                type: string
+        '400':
+          description: No valid SAML AuthnRequest bound to the request. Returned to any caller that is not a registered service provider.
+          content:
+            text/html:
+              schema:
+                type: string
+components:
+  schemas:
+    Endpoint:
+      type: object
+      properties:
+        Binding:
+          type: string
+          format: uri
+        Location:
+          type: string
+          format: uri
+    EntityDescriptor:
+      type: object
+      description: SAML 2.0 metadata `EntityDescriptor`, defined by OASIS saml-metadata-2.0-os, not by this document. Modelled here only far enough to make the endpoint's payload legible to a catalog reader.
+      properties:
+        entityID:
+          type: string
+          format: uri
+          example: https://idp.vuw.ac.nz/idp/shibboleth
+        IDPSSODescriptor:
+          $ref: '#/components/schemas/IDPSSODescriptor'
+    IDPSSODescriptor:
+      type: object
+      properties:
+        protocolSupportEnumeration:
+          type: string
+        scope:
+          type: string
+          description: shibmd:Scope asserted by the IdP.
+          example: vuw.ac.nz
+        SingleSignOnService:
+          type: array
+          items:
+            $ref: '#/components/schemas/Endpoint'
+        SingleLogoutService:
+          type: array
+          items:
+            $ref: '#/components/schemas/Endpoint'
+        NameIDFormat:
+          type: array
+          items:
+            type: string
+            format: uri
+x-operator: institution

@@ -3,7 +3,7 @@ name: Victoria University of Wellington
 description: Victoria University of Wellington public developer/API footprint review for APIs.json cataloging.
 url: https://raw.githubusercontent.com/api-evangelist/victoria-university-of-wellington/refs/heads/main/review.yml
 created: '2026-06-03'
-modified: '2026-06-03'
+modified: '2026-08-30'
 reviews:
   - date: '2026-06-03'
     rating: 2
@@ -49,3 +49,76 @@ reviews:
       - url: https://www.linkedin.com/school/victoria-university-of-wellington/
         status: 999
         note: LinkedIn school page; 999 is LinkedIn anti-bot, page exists in browser.
+  - date: '2026-08-30'
+    rating: 2
+    summary: >-
+      Re-profiled under the API Evangelist university pipeline, whose organising question is who
+      OPERATES a surface, not whether a specification exists. The June 2026 review credited "the
+      public Figshare v2 REST API" to this institution and a Figshare contract was saved into the
+      repository as the university's own; that contract and the fifteen artifacts derived from it
+      have been removed, and the Figshare relationship is now recorded as a tenancy instead. Three
+      surfaces the institution genuinely operates were confirmed: the undocumented globalobject JSON
+      endpoint, a SAML 2.0 Shibboleth Identity Provider registered in the Tuakiri New Zealand Access
+      Federation since 2012 (REFEDS R&S, Sirtfi), and a self-hosted WSO2 Identity Server fronting
+      student records. Six tenancies were recorded without saving their vendors' contracts: Figshare,
+      Ex Libris Primo/Alma, Instructure Canvas, Symplectic Elements, Ellucian Banner and Microsoft
+      Entra ID. Two further registrable domains the institution owns — vuw.ac.nz and victoria.ac.nz —
+      were registered in the cohort affiliates file; without them, two of its own hosts audited as
+      unattributable. Rating held at 2: the correction improves the profile's accuracy, not the
+      institution's footprint, which remains genuinely minimal. All endpoints probed live; none
+      fabricated.
+    endpoints:
+      - url: https://www.wgtn.ac.nz/api/globalobject
+        status: 200
+        note: Institution-operated. Public keyless JSON; CORS open to all origins; JSON body under a text/html Content-Type.
+      - url: https://idp.vuw.ac.nz/idp/shibboleth
+        status: 200
+        note: Institution-operated. SAML 2.0 IdP metadata, entityID https://idp.vuw.ac.nz/idp/shibboleth, scope vuw.ac.nz.
+      - url: https://directory.tuakiri.ac.nz/metadata/tuakiri-metadata-signed.xml
+        status: 200
+        note: Tuakiri signed federation aggregate; carries the VUW entity, registered 2012-06-26, REFEDS R&S + Sirtfi.
+      - url: https://auth-eis.vuw.ac.nz/scim2/ServiceProviderConfig
+        status: 403
+        note: Institution-operated self-hosted WSO2 Identity Server; WAF-blocked. Live and protected, not absent.
+      - url: https://studentrecords.vuw.ac.nz/
+        status: 200
+        note: Tenant. Ellucian Banner Self-Service, self-hosted; redirects into the WSO2 SAML flow. No public API.
+      - url: https://tewaharoa.victoria.ac.nz/view/sru/64VUW_INST?version=1.2&operation=searchRetrieve&query=alma.all_for_ui=maori&maximumRecords=2
+        status: 200
+        note: Tenant. Ex Libris Primo/Alma SRU 1.2, keyless; returned 20,136 matching MARCXML records.
+      - url: https://api.figshare.com/v2/oai?verb=ListIdentifiers&metadataPrefix=oai_dc&set=portal_771
+        status: 200
+        note: Tenant. Figshare's shared OAI-PMH endpoint; the setSpec portal_771 is the institution's, the interface is not.
+      - url: https://api.datacite.org/clients/figshare.vuw
+        status: 200
+        note: Tenant. DataCite repository FIGSHARE.VUW, active since 2021-06-10, 4,301 DOIs.
+      - url: https://openaccess.wgtn.ac.nz/
+        status: 202
+        note: Tenant. Figshare portal on the institution's vanity domain; x-amzn-waf-action challenge. Live, bot-gated.
+      - url: https://nuku.wgtn.ac.nz/api/v1/courses
+        status: 401
+        note: Tenant. Instructure Canvas REST API; unauthenticated JSON error confirms a live deployment.
+      - url: https://elements.wgtn.ac.nz/
+        status: 401
+        note: Tenant. Symplectic Elements, CNAME vuw.elements.symplectic.org.
+      - url: https://login.microsoftonline.com/cfe63e23-6951-427e-8683-bb84dcf1d20c/v2.0/.well-known/openid-configuration
+        status: 200
+        note: Tenant. The university's Microsoft Entra ID tenant; production browser sign-on.
+      - url: https://vuw-research-computing.github.io/raapoi-docs/
+        status: 200
+        note: Institution-operated Rāpoi HPC cluster documentation; the only currently active GitHub org.
+      - url: https://www.wgtn.ac.nz/sitemap-courses.xml
+        status: 200
+        note: Machine-readable index of 12,160 course-year pages. A catalogue, not an interface.
+      - url: https://data.wgtn.ac.nz/
+        status: 0
+        note: Does not resolve. No CKAN or Socrata open-data portal exists.
+      - url: https://api.wgtn.ac.nz/
+        status: 0
+        note: Does not resolve. No central API host.
+      - url: https://www.wgtn.ac.nz/.well-known/security.txt
+        status: 421
+        note: No RFC 9116 security.txt; the edge returns 421 rather than 404.
+      - url: https://www.wgtn.ac.nz/llms.txt
+        status: 404
+        note: No llms.txt published.

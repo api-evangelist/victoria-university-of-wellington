@@ -1,0 +1,167 @@
+{
+  "baseUrls": {
+    "mainDomain": "https://www.wgtn.ac.nz",
+    "intranet": "https://intranet.wgtn.ac.nz",
+    "cdnAssets": "https://www.wgtn.ac.nz/__data/assets/git_bridge/0005/1778018/dist/",
+    "cmsAssets": "https://www.wgtn.ac.nz/__data/assets",
+    "courses": "https://www.wgtn.ac.nz/courses",
+    "explore": "https://www.wgtn.ac.nz/explore"
+  },
+  "logo": {
+    "title": "Victoria University of Wellington",
+    "href": "https://www.wgtn.ac.nz",
+    "alt": "Te Herenga Waka – Wellington University logo",
+    "assets": {
+      "basePath": "https://www.wgtn.ac.nz/__data/assets/git_bridge/0005/1778018/dist/images/new/",
+      "desktop": {
+        "src": "v2/logo-white-full.svg?v=2",
+        "widthToHeightRatio": 1.3
+      },
+      "desktopBrand": {
+        "src": "v2/logo-green-full.svg",
+        "widthToHeightRatio": 1.3
+      },
+      "mobile": {
+        "src": "logo-white-mini.svg",
+        "widthToHeightRatio": 1
+      },
+      "tablet": {
+        "src": "v2/logo-white-portrait.svg?v=2",
+        "widthToHeightRatio": 2.2
+      },
+      "print": {
+        "src": "v2/print-logo.png",
+        "widthToHeightRatio": 1.5
+      },
+      "icon": {
+        "src": "favicon.ico",
+        "widthToHeightRatio": 2.2
+      },
+      "green": {
+        "desktop": {
+          "src": "v2/logo-green-full.svg",
+          "widthToHeightRatio": 1.3
+        },
+        "mobile": {
+          "src": "v2/logo-green-mini.svg",
+          "widthToHeightRatio": 1
+        },
+        "tablet": {
+          "src": "v2/logo-green-portrait.svg",
+          "widthToHeightRatio": 2.2
+        }
+      }
+    }
+  },
+  "navigation": {
+    "root": [
+      {
+        "href": "https://www.wgtn.ac.nz/study",
+        "class": "future",
+        "content": "Future students",
+        "type": "link"
+      },
+      {
+        "href": "https://www.wgtn.ac.nz/international",
+        "class": "international",
+        "content": "International students",
+        "type": "link"
+      },
+      {
+        "href": "https://www.wgtn.ac.nz/students",
+        "class": "current",
+        "content": "Current students",
+        "type": "link"
+      },
+      {
+        "href": "https://www.wgtn.ac.nz/research",
+        "class": "research",
+        "content": "Research",
+        "type": "link"
+      },
+      {
+        "href": "https://www.wgtn.ac.nz/engage",
+        "class": "engage",
+        "content": "Engage",
+        "type": "link"
+      }
+    ],
+    "alternate": [
+      {
+        "href": "https://www.wgtn.ac.nz/about",
+        "content": "About",
+        "type": "link"
+      },
+      {
+        "href": "https://intranet.wgtn.ac.nz",
+        "content": "Staff intranet",
+        "type": "link"
+      },
+      {
+        "href": "https://www.wgtn.ac.nz/library/",
+        "content": "Library",
+        "type": "link"
+      },
+      {
+        "href": "https://puaha.wgtn.ac.nz/signin",
+        "content": "Pūaha",
+        "type": "link"
+      },
+      {
+        "href": "https://www.wgtn.ac.nz/teaching-support/teaching-with-technology/log-in-to-nuku",
+        "content": "Nuku",
+        "type": "link"
+      },
+      {
+        "href": "https://www.wgtn.ac.nz/about/campuses-facilities/campuses",
+        "content": "Maps",
+        "type": "link"
+      },
+      {
+        "href": "https://www.wgtn.ac.nz/teaching-support",
+        "content": "Teaching support",
+        "type": "link"
+      }
+    ],
+    "footer": [
+      {}
+    ]
+  },
+  "apply": {
+    "url": "https://www.wgtn.ac.nz/study/apply-enrol/apply-old",
+    "text": "Apply now"
+  },
+  "search": {
+    "public": {
+      "action": "https://www.wgtn.ac.nz/search",
+      "queryName": "q",
+      "placeHolder": "Search for...",
+      "submitValue": "Go",
+      "new": {
+        "placeHolder": "Search entire site"
+      }
+    },
+    "intranet": {
+      "action": "https://intranet.wgtn.ac.nz/search",
+      "queryName": "q",
+      "placeHolder": "Search the intranet...",
+      "submitValue": "Search",
+      "new": {
+        "placeHolder": "Search Intranet"
+      }
+    }
+  },
+  "contacts": {
+    "tel": {
+      "main": "0800 04 04 04",
+      "mainInternational": "+64 4 472 1000",
+      "emergency": "0800 842 8888",
+      "emergencyExtension": "8888"
+    },
+    "mail": {
+      "main": "info@vuw.ac.nz"
+    }
+  },
+  "copyright": "Copyright &copy; Victoria University of Wellington, New Zealand, 2019",
+  "debug": "https://www.wgtn.ac.nz/api/globalobject"
+}

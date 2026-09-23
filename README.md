@@ -64,48 +64,76 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Te Herenga Waka—Victoria University of Wellington is a public research university in Wellington, New Zealand, ranked #244 in the QS World University Rankings 2025. This repository catalogs the institution's public, machine-readable developer/API footprint as an [APIs.json](https://apisjson.org) provider profile. The university does not run a branded developer portal; its verifiable public footprint is standards-based scholarly and library infrastructure (Figshare Open Access repository, OAI-PMH, Ex Libris Primo/Alma discovery) plus public GitHub organizations.
+Te Herenga Waka—Victoria University of Wellington is a public research university in Wellington, Aotearoa New Zealand. This repository catalogs the institution's public, machine-readable footprint as an [APIs.json](https://apisjson.org) provider profile, and its organising question is not "is there a spec" but **who operates the thing a spec describes**. A university is a federation of buyers: almost every machine-readable surface that carries this institution's name is a vendor's contract running under it. Every entry below therefore carries an `x-operator` of `institution` or `tenant`, and only `institution` contracts are saved here.
 
 - APIs.json: https://raw.githubusercontent.com/api-evangelist/victoria-university-of-wellington/refs/heads/main/apis.yml
 - Run with Naftiko: https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=victoria-university-of-wellington-api-evangelist&utm_content=repo
 
 ## Type
 
-- Index / Consumer / 3rd-Party
+- university / Public Research University — Index / Consumer / 3rd-Party
 
 ## Tags
 
-Education, Higher Education, University, Research, Open Access, Library, New Zealand
+University, Higher Education, Education, New Zealand, Public Research University, Research, Open Access, Research Repository, Institutional Repository, OAI-PMH, DSpace, Library, Course Catalog, Identity Federation, Research Computing
 
-## APIs
+## Domains
 
-- **Open Access Repository OAI-PMH** — OAI-PMH metadata feed for the Figshare-hosted Open Access repository (set `portal_771`). Docs: https://info.figshare.com/user-guide/how-to-use-figshares-oai-pmh-service/ — Base: `https://api.figshare.com/v2/oai`
-- **Figshare REST API (Open Access Repository)** — Public Figshare v2 REST API powering the university's Open Access repository. Docs: https://docs.figshare.com/ — Base: `https://api.figshare.com/v2`
-- **Te Waharoa Library Discovery (Primo / Alma)** — Ex Libris Primo discovery service backed by Alma, view ID `64VUW_INST:VUWNUI`. Docs: https://www.wgtn.ac.nz/library/how-to-use-the-library/searching-for-resources
-- **Website Global Object Endpoint** — Undocumented public JSON CMS config endpoint. Base: `https://www.wgtn.ac.nz/api/globalobject`
+The institution runs three registrable domains, all resolving to the same body: `wgtn.ac.nz` (website), `vuw.ac.nz` (identity and email), `victoria.ac.nz` (library discovery). Only `wgtn.ac.nz` was recorded before this pass, which made two of its own hosts unattributable.
 
-## Plans / Rate Limits / FinOps
+## Surfaces the institution operates (`x-operator: institution`)
 
-- [Plans & Pricing](plans/victoria-university-of-wellington-plans-pricing.yml)
-- [Rate Limits](rate-limits/victoria-university-of-wellington-rate-limits.yml)
-- [FinOps](finops/victoria-university-of-wellington-finops.yml)
+- **Institutional Repository (self-hosted DSpace 7.6.7)** — `ir.wgtn.ac.nz`, no CNAME, resolving to 130.195.21.54 in the university's own address space, admin contact `library-systems@vuw.ac.nz`. Four keyless, anonymously callable machine-readable interfaces verified live: **OAI-PMH 2.0** at `/oai/request` (23,150 records, twelve metadata formats, sets including ResearchArchive—Te Puna Rangahau, RestrictedArchive—Te Puna Rangahau, the Stout Literary Archive and Exam Papers), a **DSpace REST** HAL+JSON root at `/server/api` (18 collections; communities and discovery search answer anonymously, `/server/api/core/items` returns 401), an **OpenSearch 1.1** description with an Atom result feed, and **FAIR Signposting** link sets carrying DataCite metadata, Handle `cite-as` and license relations. The operator is `institution` because the university runs the deployment itself — but DSpace's interfaces are open-source and identical everywhere, so the saved contract describes only the endpoints probed on this host and credits the university with operating them, never with designing them. — [OpenAPI](openapi/victoria-university-of-wellington-institutional-repository-openapi.yml)
+- **Website Global Object** — public, keyless JSON configuration endpoint on the university's own CMS. HTTP 200, CORS open to all origins, `Last-Modified` 2024-04-10. Undocumented and unversioned, and it returns JSON under a `text/html` Content-Type. Base: `https://www.wgtn.ac.nz/api/globalobject` — [OpenAPI](openapi/victoria-university-of-wellington-website-globalobject-openapi.yml)
+- **Shibboleth Identity Provider (Tuakiri / eduGAIN)** — SAML 2.0 IdP, entityID `https://idp.vuw.ac.nz/idp/shibboleth`, scope `vuw.ac.nz`, registered in the Tuakiri New Zealand Access Federation since 2012-06-26 with the REFEDS Research & Scholarship entity category and a REFEDS Sirtfi assurance certification. The institution's most durable machine-readable asset. — [OpenAPI](openapi/victoria-university-of-wellington-identity-federation-openapi.yml)
+- **Enterprise SSO (WSO2 Identity Server)** — self-hosted at `auth-eis.vuw.ac.nz` (130.195.13.55, no CNAME), the SAML issuer behind student records. Every WSO2 discovery endpoint — OIDC, SAML2 metadata, SCIM 2.0 — returns HTTP 403 from a web application firewall. Live and protected, not absent.
+
+## Surfaces the institution buys (`x-operator: tenant`)
+
+The data is the university's; the contract is the vendor's. **None of these vendors' specifications are saved in this repository.**
+
+- **Open Access Repository** — Figshare portal on the institution's own `openaccess.wgtn.ac.nz` (CNAME `figshare.com`). OAI-PMH set `portal_771`; DataCite repository `FIGSHARE.VUW`, active since 2021, 4,301 DOIs.
+- **Te Waharoa Library Discovery** — Ex Libris Primo/Alma at `tewaharoa.victoria.ac.nz`, institution code `64VUW_INST`. Its SRU 1.2 endpoint is anonymously callable and returned 20,136 MARCXML records to a live probe — the largest keyless interface associated with the institution, and entirely Ex Libris's contract.
+- **Nuku Learning Management** — Instructure Canvas at `nuku.wgtn.ac.nz` (CNAME `wgtn-vanity.instructure.com`); `/api/v1` answers HTTP 401.
+- **Research Information System** — Symplectic Elements at `elements.wgtn.ac.nz` (CNAME `vuw.elements.symplectic.org`); HTTP 401.
+- **Student Records** — Ellucian Banner Self-Service at `studentrecords.vuw.ac.nz`, self-hosted but Ellucian's contract; SAML-gated, no public interface.
+- **Microsoft Entra ID tenant** — production browser sign-on; OIDC discovery and federation metadata both readable anonymously.
+
+## Education-regime conformance
+
+Reward-only, and every claim below is backed by a live probe recorded in [conformance](conformance/victoria-university-of-wellington-conformance.yml): `saml`, `shibboleth` and **`oai-pmh` (institution — the university's own DSpace base URL at `ir.wgtn.ac.nz/oai/request`)**; `oai-pmh` and `datacite` again as a tenant via the separate Figshare portal; `datacite` present institution-side through the repository's FAIR Signposting `describedby` relation; `lti` present via Canvas. `scim` is **unreadable rather than absent** — WSO2 ships it and the firewall returns 403. `oneroster`, `ed-fi`, `caliper`, `qti`, `crossref` were probed and not found; `orcid` is consumed by the institution, not served by it, so no credit is claimed.
+
+## Artifacts
+
+- [Authentication](authentication/victoria-university-of-wellington-authentication.yml) · [Scopes](scopes/victoria-university-of-wellington-scopes.yml) · [Errors](errors/victoria-university-of-wellington-errors.yml) · [Lifecycle](lifecycle/victoria-university-of-wellington-lifecycle.yml) · [Conformance](conformance/victoria-university-of-wellington-conformance.yml)
+- [Repository OpenAPI](openapi/victoria-university-of-wellington-institutional-repository-openapi.yml) · [OAI-PMH Identify capture](examples/victoria-university-of-wellington-ir-oai-identify.xml) · [DSpace REST root capture](examples/victoria-university-of-wellington-ir-dspace-root.json)
+- [JSON Schema](json-schema/victoria-university-of-wellington-globalobject-schema.json) · [Vocabulary](vocabulary/victoria-university-of-wellington-vocabulary.yml) · [JSON-LD context](json-ld/victoria-university-of-wellington-context.jsonld) · [Spectral rules](rules/victoria-university-of-wellington-rules.yml)
+- [Plans & Pricing](plans/victoria-university-of-wellington-plans-pricing.yml) · [Rate Limits](rate-limits/victoria-university-of-wellington-rate-limits.yml) · [FinOps](finops/victoria-university-of-wellington-finops.yml) · [Domain security](security/victoria-university-of-wellington-domain-security.yml) · [Review](review.yml)
 
 ## Timestamps
 
 - Created: 2026-06-03
-- Modified: 2026-06-03
+- Modified: 2026-08-30
 
 ## Common Properties
 
 - Website: https://www.wgtn.ac.nz/
-- GitHub: https://github.com/victoriauniversity
-- SourceCode (Library): https://github.com/VUW-Library
+- GitHub (web toolkit): https://github.com/victoriauniversity
+- GitHub (library): https://github.com/VUW-Library
+- GitHub (research computing): https://github.com/vuw-research-computing
+- Rāpoi HPC documentation: https://vuw-research-computing.github.io/raapoi-docs/
+- Institutional repository: https://ir.wgtn.ac.nz/
+- OAI-PMH base URL: https://ir.wgtn.ac.nz/oai/request
+- Course catalogue: https://www.wgtn.ac.nz/courses
 - LinkedIn: https://www.linkedin.com/school/victoria-university-of-wellington/
-- Review: [review.yml](review.yml)
 
 ## Notes
 
-All endpoints in this profile were probed live on 2026-06-03 and are documented in `review.yml` with their observed HTTP status. No endpoints were fabricated. The university has no centralized developer portal; the OAI-PMH and Figshare REST surfaces are operated by Figshare on the university's behalf, and the Primo discovery service is operated via Ex Libris. The `globalobject` endpoint is undocumented but publicly responsive. The LinkedIn page returns HTTP 999 to automated probes (anti-bot) but resolves in a browser. The student records portal is SSO-gated with no public API.
+**A correction was made on 2026-08-30.** The June 2026 profile of this institution saved Figshare's generic v2 REST contract into this repository as though the university had authored it, and eleven further artifacts were derived from it. That contract and every artifact derived from it — sixteen files across `openapi/`, `json-schema/`, `json-structure/`, `examples/`, `rules/`, `vocabulary/`, `json-ld/`, `collections/`, `agentic-access/` and `capabilities/` — have been removed. The Figshare relationship itself was **not** removed: it is real, and it is recorded as a tenancy. This correction lowers the institution's score, and that is the intended outcome.
+
+**A second correction was made on 2026-08-30.** A re-run of the pipeline swept the institution's own subdomains and found `ir.wgtn.ac.nz` — a self-hosted DSpace 7.6.7 institutional repository that both the June 2026 profile and the first correction pass had missed entirely. It is the institution's largest genuinely institution-operated surface and it upgrades `oai-pmh` conformance from tenant-only to institution-operated. The university runs **two** repositories: this one, on its own infrastructure, and the Figshare portal it buys. The same sweep cleared `researcharchive.vuw.ac.nz` (302 to Te Waharoa — the legacy archive was migrated), `ecs.wgtn.ac.nz` and `homepages.ecs.vuw.ac.nz` (a Foswiki school site, HTML only), and re-confirmed that `data.wgtn.ac.nz`, `api.wgtn.ac.nz`, `courses.wgtn.ac.nz`, `timetable.wgtn.ac.nz`, `status.wgtn.ac.nz` and `developer.wgtn.ac.nz` do not resolve. This correction raises the institution's score, on its own engineering.
+
+Everything in this profile was probed live on 2026-08-30 and no endpoint was fabricated. Two responses are easy to misread and are written down explicitly: `openaccess.wgtn.ac.nz` returns HTTP 202 with `x-amzn-waf-action: challenge` (a bot challenge — live, not dead), and the LinkedIn page returns HTTP 999 to automated probes (LinkedIn's anti-bot, resolves in a browser). No open-data portal exists (`data.wgtn.ac.nz` does not resolve), there is no `api.wgtn.ac.nz`, no `llms.txt`, and no RFC 9116 `security.txt` (`/.well-known/security.txt` returns 421). No public generative-AI policy page could be located, but the site's own search returns 403 to non-browser clients and `robots.txt` disallows `/search`, so that is a limit on our reading rather than a confirmed institutional silence.
 
 ## Maintainers
 

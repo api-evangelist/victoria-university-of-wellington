@@ -1,0 +1,143 @@
+openapi: 3.0.3
+info:
+  title: Te Herenga Waka Shibboleth Identity Provider
+  description: |-
+    Te Herenga Waka—Victoria University of Wellington operates its own SAML 2.0 Identity Provider (Shibboleth) at https://idp.vuw.ac.nz, entityID `https://idp.vuw.ac.nz/idp/shibboleth`, scope `vuw.ac.nz`. The IdP serves its own SAML 2.0 metadata document over plain HTTPS GET with no authentication, and the same entity is registered in Tuakiri, the New Zealand Access Federation (registration authority https://tuakiri.ac.nz/, registered 2012-06-26), which republishes it in the signed federation aggregate at https://directory.tuakiri.ac.nz/metadata/tuakiri-metadata-signed.xml — and, through Tuakiri, into eduGAIN.
+    This is the one class of machine-readable interface a university operates by definition rather than by purchase, and it is the institution's own engineering. The federation entry carries the REFEDS Research & Scholarship entity category and a REFEDS Sirtfi assurance certification, and advertises SAML2 HTTP-POST, HTTP-Redirect and SOAP/ECP single sign-on, HTTP-POST and HTTP-Redirect single logout, persistent and transient NameID formats, and the eduPerson / SCHAC / auEduPerson attribute set (mail, schacHomeOrganization, schacHomeOrganizationType, auEduPersonSharedToken and related).
+    THIS CONTRACT WAS NOT PUBLISHED BY THE UNIVERSITY. There is no OpenAPI for a SAML IdP; this description was derived by API Evangelist from live, unauthenticated probes on 2026-08-30 so that the endpoint is discoverable alongside the institution's other surfaces. The authoritative machine-readable artifact is the SAML metadata itself, not this document.
+    Separately, and worth stating plainly: the university's production browser sign-on for its student-facing services now federates to a Microsoft Entra ID tenant (cfe63e23-6951-427e-8683-bb84dcf1d20c), observed on the Nuku learning-management redirect. That surface is a tenant of Microsoft's, not institution-operated, and is recorded as such in apis.yml.
+
+    No credential of any kind is issued or accepted on this endpoint; it was called anonymously and returned a full response. The empty `security` array states that explicitly rather than leaving it unsaid.
+  version: '2026-08-30'
+  contact:
+    name: Victoria University of Wellington
+    url: https://www.wgtn.ac.nz/about/contacts
+    email: info@vuw.ac.nz
+  x-provenance:
+    generated: '2026-08-30'
+    method: probed
+    source: https://idp.vuw.ac.nz/idp/shibboleth
+    note: Endpoint, entityID, scope, bindings, NameID formats, attribute set, entity categories and registration
+      authority all read from the live metadata document and from the Tuakiri signed federation aggregate.
+      Nothing inferred.
+x-operator: institution
+servers:
+- url: https://idp.vuw.ac.nz
+  description: Victoria University of Wellington Shibboleth Identity Provider
+tags:
+- name: IdentityFederation
+  description: SAML 2.0 identity federation surfaces operated by the institution.
+paths:
+  /idp/shibboleth:
+    get:
+      operationId: getIdpSamlMetadata
+      summary: Retrieve the institution's SAML 2.0 IdP metadata
+      description: Returns the SAML 2.0 `EntityDescriptor` for entityID `https://idp.vuw.ac.nz/idp/shibboleth`,
+        including the IDPSSODescriptor, signing and encryption key descriptors (CN=idp.vuw.ac.nz), single
+        sign-on and single logout endpoints, supported NameID formats and the released attribute set.
+        Unauthenticated. The document carries Shibboleth's standard "example metadata" preamble; the authoritative,
+        signed copy of this entity for federation consumers is the Tuakiri aggregate.
+      tags:
+      - IdentityFederation
+      responses:
+        '200':
+          description: SAML 2.0 metadata document.
+          content:
+            application/samlmetadata+xml:
+              schema:
+                $ref: '#/components/schemas/EntityDescriptor'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/EntityDescriptor'
+  /idp/profile/SAML2/Redirect/SSO:
+    get:
+      operationId: samlRedirectSso
+      summary: SAML 2.0 HTTP-Redirect single sign-on endpoint
+      description: 'The SAML2 HTTP-Redirect SSO binding advertised in the IdP metadata. It is not a data
+        API: it expects a signed `SAMLRequest` from a registered service provider and returns HTTP 400
+        to an unbound request, which is the correct behaviour and was the observed response.'
+      tags:
+      - IdentityFederation
+      parameters:
+      - name: SAMLRequest
+        in: query
+        required: true
+        description: Deflated, base64-encoded SAML 2.0 AuthnRequest.
+        schema:
+          type: string
+      - name: RelayState
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: SigAlg
+        in: query
+        required: false
+        schema:
+          type: string
+          format: uri
+      - name: Signature
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Authentication flow response for a valid request from a registered SP.
+          content:
+            text/html:
+              schema:
+                type: string
+        '400':
+          description: No valid SAML AuthnRequest bound to the request. Returned to any caller that is
+            not a registered service provider.
+          content:
+            text/html:
+              schema:
+                type: string
+components:
+  schemas:
+    EntityDescriptor:
+      type: object
+      description: SAML 2.0 metadata `EntityDescriptor`, defined by OASIS saml-metadata-2.0-os, not by
+        this document. Modelled here only far enough to make the endpoint's payload legible to a catalog
+        reader.
+      properties:
+        entityID:
+          type: string
+          format: uri
+          example: https://idp.vuw.ac.nz/idp/shibboleth
+        IDPSSODescriptor:
+          $ref: '#/components/schemas/IDPSSODescriptor'
+    IDPSSODescriptor:
+      type: object
+      properties:
+        protocolSupportEnumeration:
+          type: string
+        scope:
+          type: string
+          description: shibmd:Scope asserted by the IdP.
+          example: vuw.ac.nz
+        SingleSignOnService:
+          type: array
+          items:
+            $ref: '#/components/schemas/Endpoint'
+        SingleLogoutService:
+          type: array
+          items:
+            $ref: '#/components/schemas/Endpoint'
+        NameIDFormat:
+          type: array
+          items:
+            type: string
+            format: uri
+    Endpoint:
+      type: object
+      properties:
+        Binding:
+          type: string
+          format: uri
+        Location:
+          type: string
+          format: uri
+security: []

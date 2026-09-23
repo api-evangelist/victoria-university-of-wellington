@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  method: harvested
+  x-source-url: https://idp.vuw.ac.nz/idp/shibboleth
+  generated: 2026-08-30
+  Captured verbatim from the institution's own Identity Provider by API Evangelist. This document
+  is Te Herenga Waka's, not ours; only this comment was added.
+-->
+<!--
+     This is example metadata only. Do *NOT* supply it as is without review,
+     and do *NOT* provide it in real time to your partners.
+
+     This metadata is not dynamic - it will not change as your configuration changes.
+-->
+<EntityDescriptor  xmlns="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:shibmd="urn:mace:shibboleth:metadata:1.0" xmlns:xml="http://www.w3.org/XML/1998/namespace" xmlns:mdui="urn:oasis:names:tc:SAML:metadata:ui" entityID="https://idp.vuw.ac.nz/idp/shibboleth">
+
+    <IDPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol urn:oasis:names:tc:SAML:1.1:protocol urn:mace:shibboleth:1.0">
+
+        <Extensions>
+            <shibmd:Scope regexp="false">vuw.ac.nz</shibmd:Scope>
+<!--
+    Fill in the details for your IdP here 
+
+            <mdui:UIInfo>
+                <mdui:DisplayName xml:lang="en">A Name for the IdP at idp.vuw.ac.nz</mdui:DisplayName>
+                <mdui:Description xml:lang="en">Enter a description of your IdP at idp.vuw.ac.nz</mdui:Description>
+                <mdui:Logo height="80" width="80">https://idp.vuw.ac.nz/Path/To/Logo.png</mdui:Logo>
+            </mdui:UIInfo>
+-->
+        </Extensions>
+
+        <KeyDescriptor use="signing">
+            <ds:KeyInfo>
+                    <ds:X509Data>
+                        <ds:X509Certificate>
+MIIDHzCCAgegAwIBAgIUb5IG/112psLa4kcL03u4FgAAZsIwDQYJKoZIhvcNAQEL
+BQAwGDEWMBQGA1UEAwwNaWRwLnZ1dy5hYy5uejAeFw0xODAyMTkwMDM5MTNaFw0z
+ODAyMTkwMDM5MTNaMBgxFjAUBgNVBAMMDWlkcC52dXcuYWMubnowggEiMA0GCSqG
+SIb3DQEBAQUAA4IBDwAwggEKAoIBAQDQ5Zs3IfHrANy6o8L7/Rf77lojcW17fB08
+e5uLWjT+rLcaFpS4ym+n3aEGiK+H3YY6eepLKHMnM9SzVxb7KYW5x64k4h40+j2Z
+CsZty/ouDiU8rs5Uq8Da5F01BMUq4uur7nVRv2gPFQ9NT3Z/M+ngtVxYg3N+rvsy
+oN4hpNVwTX3qnOiKlm/6aOh6LgYgTb2es4l5x4qIBXKTYUr/WDqEFIDAS68ykBCb
+NcNBK/TypRDhq543yUPa5kPVm6f+/eM1e4uB5l6bo1IgYiqBxqF6oPuFaTXptmuM
+XrsIb5uHSoaj6x4+7s+nAuNXTXX3fB4JohLtADsPLbzX4stLXLJjAgMBAAGjYTBf
+MB0GA1UdDgQWBBTlq7+HBg45OE2TfEgAWSEV4IbgjDA+BgNVHREENzA1gg1pZHAu
+dnV3LmFjLm56hiRodHRwczovL2lkcC52dXcuYWMubnovaWRwL3NoaWJib2xldGgw
+DQYJKoZIhvcNAQELBQADggEBAAEfsVQXF84DqJpPCO8nq9ITp2wEXe/wG5v2LdN6
+XZLAkmhRv3Ts+LMizv98At6/GZY3j/7rxziaVsITgZ2NBleZaJHxAnlnGMR1pkF/
+2PXy/Qd3Za2BVvUaux0j1S2zgE2Q3Ml9VOkA5RtAuUKQJO4MFJf/EvfobD/pjs3J
+lS8Cf8xfuDIiAycPIwLg6phXmpiWeDOM1Lgb2/jtEaThGP5lZpM80vLACxKXFnz3
+ZuYx3+XTTKigMTblcwQAI+dVdpL0Quk40O4WURB8o8pIRCP92IeYGXBhnPndfz3f
+9gbO2IVWvjUYj/TTXXBIYsq8LYsCdIeAJ5ufCs+jc0NEoGY=
+                        </ds:X509Certificate>
+                    </ds:X509Data>
+            </ds:KeyInfo>
+
+        </KeyDescriptor>
+        <KeyDescriptor use="signing">
+            <ds:KeyInfo>
+                    <ds:X509Data>
+                        <ds:X509Certificate>
+MIIDHzCCAgegAwIBAgIUB0REtMRNiUiTx8smPcxEGpfxskIwDQYJKoZIhvcNAQEL
+BQAwGDEWMBQGA1UEAwwNaWRwLnZ1dy5hYy5uejAeFw0xODAyMTkwMDM5MTJaFw0z
+ODAyMTkwMDM5MTJaMBgxFjAUBgNVBAMMDWlkcC52dXcuYWMubnowggEiMA0GCSqG
+SIb3DQEBAQUAA4IBDwAwggEKAoIBAQCLdcVbS8FxpyiDj5tD6RhkHLDwiZKAZ0rK
+Hfx7EzSDH5jGdiPhQMEBDeKkC80GM8Qe8H9qGTPChz7/md/wjKCPDGIOqZC007/c
+iZPJ3mYrUS3Sid6Om136a6CuFHVXK+xDhE5o8N+8/DZw9b37on6xnkEjRrsFF78a
+CdtL1wUeOv4gwsho82CXSl7HQ1s2gup+wYDhfvhibw4ehvXM51W3Gsp5KFlgC9K6
+NwjZzh9p0ftZJt5iZ/nU6PQ3ToleMZwwYDHNWLm8y1zgTS6qmOSXNVzTZ1v8skWj
+uhPWdGcj0hm7J1Pjxp1VfN8lFdpzTOgL8YNpPf9dn+8au8hwqeAzAgMBAAGjYTBf
+MB0GA1UdDgQWBBTBS4aRNua/P2OMIJ1+oyp7MLRMgzA+BgNVHREENzA1gg1pZHAu
+dnV3LmFjLm56hiRodHRwczovL2lkcC52dXcuYWMubnovaWRwL3NoaWJib2xldGgw
+DQYJKoZIhvcNAQELBQADggEBAFnI31S3obQynxYNmDIJAT5rtNYA3lugXEuBYjdB
+a+7pBOGwwYMX5UBiqp9Rb5hdP96OrdJv4ODou2kpVZnBAhcipZ2xTfxMvh0FGm/F
+PWXS75TIb3MWylG7fZqu/S1WLrtSF+a9y/8qdxEQjaKqX4LLNjPhKnRMtlVrbuyQ
+V2WKTRcAijPzvRRMQDrIm1R8IwLE3jnGrXKfBhSrrcU+u09R3+TDPVP3peIYONnj
+kn0WTvW42R/9jpyS7tzGiNjp1e92QMrTjhGbZXWpgFJ52fAGvOdFzB9CSv/4tsoe
+6el1Y5qt/f1i7q1JwuUj95qkbg+0rMMkT6nTbRcp3q/s+PY=
+                        </ds:X509Certificate>
+                    </ds:X509Data>
+            </ds:KeyInfo>
+
+        </KeyDescriptor>
+        <KeyDescriptor use="encryption">
+            <ds:KeyInfo>
+                    <ds:X509Data>
+                        <ds:X509Certificate>
+MIIDIDCCAgigAwIBAgIVANQHA4T5/bgPlB7o9Aw+FTon3G1FMA0GCSqGSIb3DQEB
+CwUAMBgxFjAUBgNVBAMMDWlkcC52dXcuYWMubnowHhcNMTgwMjE5MDAzOTEzWhcN
+MzgwMjE5MDAzOTEzWjAYMRYwFAYDVQQDDA1pZHAudnV3LmFjLm56MIIBIjANBgkq
+hkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAg7fqkexyJeMvj9zm8fABnnmzbU3dgljR
+dNeJ2osk5G0mnHe2ATtEJleEZ8tJQEznv4zc7eLmGKSk4WNbN1haLpVbuXpEANDP
+R5+hLEAgVkliXyea4yPR/dY1V6IXQU41yZIV876LJsDC/EeIxuQ68dGC2+Fk0t1G
+PQSNYdghZl77qDZkIyuaBHMB59TQIvloe/citgPH7USPH/+is7+2MrA3v2TNjzJz
+JTcPxCGw/GrnRK12mdVB7/XueULtciqWBuF5F65XjummcrVkMmYDsAyfJs4Rv7ym
+rrYtytxfKCCJXzUt+4da/5MxIP7K61O+Xk5y1F+F6xo3dcKzDc53HQIDAQABo2Ew
+XzAdBgNVHQ4EFgQUv9JJ95fzJk9sLx2g9WKuMLHnOWswPgYDVR0RBDcwNYINaWRw
+LnZ1dy5hYy5ueoYkaHR0cHM6Ly9pZHAudnV3LmFjLm56L2lkcC9zaGliYm9sZXRo
+MA0GCSqGSIb3DQEBCwUAA4IBAQApSRzKOkN3TTyyd/QFXASrFJPvGYv0gd9xnlJG
+SBWVFOInIwECzZb8uveIeYydShUhjkZqcAFLRbfXmuSeK+vJKN3gWAQcu3PvDmp3
+3dGBNyoh8hUECNP0CTYE8WZIHbSNBkOMQcDlsvS5qsrZEPAW4SSFJ8qaq7lY1S/T
+eGZD4tKSB76J/GLPimELS6VhMwKYKgMymMdpmi/TyLgtEAuExD3P35P/XkIJ0yuE
+376Q6vFDtXbS/DO37v0+xScukDVOzsq6Qa2W+ZSXTmAtI+OpdfPfWRkwLJ8ufdtr
+oJZwb1E9LGHCeZwIxPgutefNeu8RVP5zPavWB4Ib0v2SApDQ
+                        </ds:X509Certificate>
+                    </ds:X509Data>
+            </ds:KeyInfo>
+
+        </KeyDescriptor>
+
+        <ArtifactResolutionService Binding="urn:oasis:names:tc:SAML:1.0:bindings:SOAP-binding" Location="https://idp.vuw.ac.nz:8443/idp/profile/SAML1/SOAP/ArtifactResolution" index="1"/>
+        <ArtifactResolutionService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://idp.vuw.ac.nz:8443/idp/profile/SAML2/SOAP/ArtifactResolution" index="2"/>
+
+        <SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://idp.vuw.ac.nz/idp/profile/SAML2/Redirect/SLO"/>
+        <SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://idp.vuw.ac.nz/idp/profile/SAML2/POST/SLO"/>
+        <SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST-SimpleSign" Location="https://idp.vuw.ac.nz/idp/profile/SAML2/POST-SimpleSign/SLO"/>
+        <SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://idp.vuw.ac.nz:8443/idp/profile/SAML2/SOAP/SLO"/>
+
+        <SingleSignOnService Binding="urn:mace:shibboleth:1.0:profiles:AuthnRequest" Location="https://idp.vuw.ac.nz/idp/profile/Shibboleth/SSO"/>
+        <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://idp.vuw.ac.nz/idp/profile/SAML2/POST/SSO"/>
+        <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST-SimpleSign" Location="https://idp.vuw.ac.nz/idp/profile/SAML2/POST-SimpleSign/SSO"/>
+        <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://idp.vuw.ac.nz/idp/profile/SAML2/Redirect/SSO"/>
+
+    </IDPSSODescriptor>
+
+
+    <AttributeAuthorityDescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol urn:oasis:names:tc:SAML:1.1:protocol">
+
+        <Extensions>
+            <shibmd:Scope regexp="false">vuw.ac.nz</shibmd:Scope>
+        </Extensions>
+
+        <KeyDescriptor use="signing">
+            <ds:KeyInfo>
+                    <ds:X509Data>
+                        <ds:X509Certificate>
+MIIDHzCCAgegAwIBAgIUb5IG/112psLa4kcL03u4FgAAZsIwDQYJKoZIhvcNAQEL
+BQAwGDEWMBQGA1UEAwwNaWRwLnZ1dy5hYy5uejAeFw0xODAyMTkwMDM5MTNaFw0z
+ODAyMTkwMDM5MTNaMBgxFjAUBgNVBAMMDWlkcC52dXcuYWMubnowggEiMA0GCSqG
+SIb3DQEBAQUAA4IBDwAwggEKAoIBAQDQ5Zs3IfHrANy6o8L7/Rf77lojcW17fB08
+e5uLWjT+rLcaFpS4ym+n3aEGiK+H3YY6eepLKHMnM9SzVxb7KYW5x64k4h40+j2Z
+CsZty/ouDiU8rs5Uq8Da5F01BMUq4uur7nVRv2gPFQ9NT3Z/M+ngtVxYg3N+rvsy
+oN4hpNVwTX3qnOiKlm/6aOh6LgYgTb2es4l5x4qIBXKTYUr/WDqEFIDAS68ykBCb
+NcNBK/TypRDhq543yUPa5kPVm6f+/eM1e4uB5l6bo1IgYiqBxqF6oPuFaTXptmuM
+XrsIb5uHSoaj6x4+7s+nAuNXTXX3fB4JohLtADsPLbzX4stLXLJjAgMBAAGjYTBf
+MB0GA1UdDgQWBBTlq7+HBg45OE2TfEgAWSEV4IbgjDA+BgNVHREENzA1gg1pZHAu
+dnV3LmFjLm56hiRodHRwczovL2lkcC52dXcuYWMubnovaWRwL3NoaWJib2xldGgw
+DQYJKoZIhvcNAQELBQADggEBAAEfsVQXF84DqJpPCO8nq9ITp2wEXe/wG5v2LdN6
+XZLAkmhRv3Ts+LMizv98At6/GZY3j/7rxziaVsITgZ2NBleZaJHxAnlnGMR1pkF/
+2PXy/Qd3Za2BVvUaux0j1S2zgE2Q3Ml9VOkA5RtAuUKQJO4MFJf/EvfobD/pjs3J
+lS8Cf8xfuDIiAycPIwLg6phXmpiWeDOM1Lgb2/jtEaThGP5lZpM80vLACxKXFnz3
+ZuYx3+XTTKigMTblcwQAI+dVdpL0Quk40O4WURB8o8pIRCP92IeYGXBhnPndfz3f
+9gbO2IVWvjUYj/TTXXBIYsq8LYsCdIeAJ5ufCs+jc0NEoGY=
+                        </ds:X509Certificate>
+                    </ds:X509Data>
+            </ds:KeyInfo>
+
+        </KeyDescriptor>
+        <KeyDescriptor use="signing">
+            <ds:KeyInfo>
+                    <ds:X509Data>
+                        <ds:X509Certificate>
+MIIDHzCCAgegAwIBAgIUB0REtMRNiUiTx8smPcxEGpfxskIwDQYJKoZIhvcNAQEL
+BQAwGDEWMBQGA1UEAwwNaWRwLnZ1dy5hYy5uejAeFw0xODAyMTkwMDM5MTJaFw0z
+ODAyMTkwMDM5MTJaMBgxFjAUBgNVBAMMDWlkcC52dXcuYWMubnowggEiMA0GCSqG
+SIb3DQEBAQUAA4IBDwAwggEKAoIBAQCLdcVbS8FxpyiDj5tD6RhkHLDwiZKAZ0rK
+Hfx7EzSDH5jGdiPhQMEBDeKkC80GM8Qe8H9qGTPChz7/md/wjKCPDGIOqZC007/c
+iZPJ3mYrUS3Sid6Om136a6CuFHVXK+xDhE5o8N+8/DZw9b37on6xnkEjRrsFF78a
+CdtL1wUeOv4gwsho82CXSl7HQ1s2gup+wYDhfvhibw4ehvXM51W3Gsp5KFlgC9K6
+NwjZzh9p0ftZJt5iZ/nU6PQ3ToleMZwwYDHNWLm8y1zgTS6qmOSXNVzTZ1v8skWj
+uhPWdGcj0hm7J1Pjxp1VfN8lFdpzTOgL8YNpPf9dn+8au8hwqeAzAgMBAAGjYTBf
+MB0GA1UdDgQWBBTBS4aRNua/P2OMIJ1+oyp7MLRMgzA+BgNVHREENzA1gg1pZHAu
+dnV3LmFjLm56hiRodHRwczovL2lkcC52dXcuYWMubnovaWRwL3NoaWJib2xldGgw
+DQYJKoZIhvcNAQELBQADggEBAFnI31S3obQynxYNmDIJAT5rtNYA3lugXEuBYjdB
+a+7pBOGwwYMX5UBiqp9Rb5hdP96OrdJv4ODou2kpVZnBAhcipZ2xTfxMvh0FGm/F
+PWXS75TIb3MWylG7fZqu/S1WLrtSF+a9y/8qdxEQjaKqX4LLNjPhKnRMtlVrbuyQ
+V2WKTRcAijPzvRRMQDrIm1R8IwLE3jnGrXKfBhSrrcU+u09R3+TDPVP3peIYONnj
+kn0WTvW42R/9jpyS7tzGiNjp1e92QMrTjhGbZXWpgFJ52fAGvOdFzB9CSv/4tsoe
+6el1Y5qt/f1i7q1JwuUj95qkbg+0rMMkT6nTbRcp3q/s+PY=
+                        </ds:X509Certificate>
+                    </ds:X509Data>
+            </ds:KeyInfo>
+
+        </KeyDescriptor>
+        <KeyDescriptor use="encryption">
+            <ds:KeyInfo>
+                    <ds:X509Data>
+                        <ds:X509Certificate>
+MIIDIDCCAgigAwIBAgIVANQHA4T5/bgPlB7o9Aw+FTon3G1FMA0GCSqGSIb3DQEB
+CwUAMBgxFjAUBgNVBAMMDWlkcC52dXcuYWMubnowHhcNMTgwMjE5MDAzOTEzWhcN
+MzgwMjE5MDAzOTEzWjAYMRYwFAYDVQQDDA1pZHAudnV3LmFjLm56MIIBIjANBgkq
+hkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAg7fqkexyJeMvj9zm8fABnnmzbU3dgljR
+dNeJ2osk5G0mnHe2ATtEJleEZ8tJQEznv4zc7eLmGKSk4WNbN1haLpVbuXpEANDP
+R5+hLEAgVkliXyea4yPR/dY1V6IXQU41yZIV876LJsDC/EeIxuQ68dGC2+Fk0t1G
+PQSNYdghZl77qDZkIyuaBHMB59TQIvloe/citgPH7USPH/+is7+2MrA3v2TNjzJz
+JTcPxCGw/GrnRK12mdVB7/XueULtciqWBuF5F65XjummcrVkMmYDsAyfJs4Rv7ym
+rrYtytxfKCCJXzUt+4da/5MxIP7K61O+Xk5y1F+F6xo3dcKzDc53HQIDAQABo2Ew
+XzAdBgNVHQ4EFgQUv9JJ95fzJk9sLx2g9WKuMLHnOWswPgYDVR0RBDcwNYINaWRw
+LnZ1dy5hYy5ueoYkaHR0cHM6Ly9pZHAudnV3LmFjLm56L2lkcC9zaGliYm9sZXRo
+MA0GCSqGSIb3DQEBCwUAA4IBAQApSRzKOkN3TTyyd/QFXASrFJPvGYv0gd9xnlJG
+SBWVFOInIwECzZb8uveIeYydShUhjkZqcAFLRbfXmuSeK+vJKN3gWAQcu3PvDmp3
+3dGBNyoh8hUECNP0CTYE8WZIHbSNBkOMQcDlsvS5qsrZEPAW4SSFJ8qaq7lY1S/T
+eGZD4tKSB76J/GLPimELS6VhMwKYKgMymMdpmi/TyLgtEAuExD3P35P/XkIJ0yuE
+376Q6vFDtXbS/DO37v0+xScukDVOzsq6Qa2W+ZSXTmAtI+OpdfPfWRkwLJ8ufdtr
+oJZwb1E9LGHCeZwIxPgutefNeu8RVP5zPavWB4Ib0v2SApDQ
+                        </ds:X509Certificate>
+                    </ds:X509Data>
+            </ds:KeyInfo>
+
+        </KeyDescriptor>
+
+        <AttributeService Binding="urn:oasis:names:tc:SAML:1.0:bindings:SOAP-binding" Location="https://idp.vuw.ac.nz:8443/idp/profile/SAML1/SOAP/AttributeQuery"/>
+        <AttributeService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://idp.vuw.ac.nz:8443/idp/profile/SAML2/SOAP/AttributeQuery"/>
+
+    </AttributeAuthorityDescriptor>
+
+</EntityDescriptor>

@@ -1,0 +1,453 @@
+# x-archived-from: victoria-university-of-wellington-institutional-repository-openapi.yml
+# x-archived-on: 2026-09-16
+openapi: 3.2.0
+info:
+  title: Te Herenga Waka Institutional Repository ResearchRepository API
+  description: |-
+    Pre-refine source document. Te Herenga Waka—Victoria University of Wellington self-hosts a DSpace 7.6.7 institutional repository at https://ir.wgtn.ac.nz. The host sits under the institution's own registrable domain, carries NO CNAME, and resolves directly to 130.195.21.54 inside the university's own address space; the repository's OAI-PMH adminEmail and OpenSearch contact are both library-systems@vuw.ac.nz. The institution operates the deployment.
+    THIS CONTRACT WAS NOT PUBLISHED BY THE UNIVERSITY, AND THE INTERFACE IT DESCRIBES IS NOT THE UNIVERSITY'S DESIGN. DSpace is open-source software and its REST, OAI-PMH, OpenSearch and Signposting surfaces are identical across every DSpace 7 deployment in the world. What is specific to this institution is that it RUNS the deployment on its own infrastructure rather than buying it as a tenancy — which is why the operator is `institution` and not `tenant`. Only endpoints returning an anonymous, verified payload from ir.wgtn.ac.nz on 2026-08-30 are described below. Nothing was copied from DSpace's own published specification.
+  version: '2026-08-30'
+  contact:
+    name: Victoria University of Wellington Library Systems
+    url: https://www.wgtn.ac.nz/library
+    email: library-systems@vuw.ac.nz
+  termsOfService: https://www.wgtn.ac.nz/site-info
+  x-provenance:
+    generated: '2026-08-30'
+    method: derived
+    source: openapi/_original/victoria-university-of-wellington-institutional-repository.yaml
+    note: Refined single-tag split of openapi/_original/victoria-university-of-wellington-institutional-repository.yaml,
+      which was itself probed live and unauthenticated against https://ir.wgtn.ac.nz on 2026-08-30. The
+      institution operates this deployment on its own infrastructure (ir.wgtn.ac.nz, no CNAME, 130.195.21.54);
+      the underlying interface is DSpace 7.6.7's open-source contract and is identical across DSpace deployments,
+      so no interface design is credited to the university - only its operation of the endpoint.
+x-operator: institution
+servers:
+- url: https://ir.wgtn.ac.nz
+  description: Victoria University of Wellington institutional repository (self-hosted DSpace 7.6.7)
+tags:
+- name: ResearchRepository
+  description: Anonymous read and harvesting surfaces of the institution's own repository.
+paths:
+  /oai/request:
+    get:
+      operationId: oaiPmhRequest
+      summary: OAI-PMH 2.0 harvesting endpoint
+      description: 'The institution''s own OAI-PMH 2.0 base URL. This is the surface class a university
+        operates even when its repository software is someone else''s, and here both the endpoint and
+        the infrastructure are the institution''s. Verified anonymously on 2026-08-30: verb=Identify returns
+        repositoryName "Institutional Repository at Victoria University of Wellington", adminEmail library-systems@vuw.ac.nz,
+        protocolVersion 2.0, deletedRecord transient, granularity YYYY-MM-DDThh:mm:ssZ, and repositoryIdentifier
+        ir.wgtn.ac.nz. verb=ListIdentifiers with metadataPrefix oai_dc reports completeListSize 23150.
+        verb=ListMetadataFormats returns twelve prefixes; verb=ListSets returns the community and collection
+        sets, including ResearchArchive-Te Puna Rangahau, RestrictedArchive-Te Puna Rangahau, the Stout
+        Literary Archive, Exam Papers, and the Wellington School of Business and Government / Orauariki.'
+      tags:
+      - ResearchRepository
+      parameters:
+      - name: verb
+        in: query
+        required: true
+        description: OAI-PMH verb.
+        schema:
+          type: string
+          enum:
+          - Identify
+          - ListMetadataFormats
+          - ListSets
+          - ListIdentifiers
+          - ListRecords
+          - GetRecord
+      - name: metadataPrefix
+        in: query
+        required: false
+        description: 'Metadata format. Twelve are advertised: oai_dc, qdc, dim, xoai, mets, mods, marc,
+          rdf, ore, didl, etdms and uketd_dc.'
+        schema:
+          type: string
+          enum:
+          - oai_dc
+          - qdc
+          - dim
+          - xoai
+          - mets
+          - mods
+          - marc
+          - rdf
+          - ore
+          - didl
+          - etdms
+          - uketd_dc
+      - name: set
+        in: query
+        required: false
+        description: setSpec, e.g. com_123456789_1 for ResearchArchive-Te Puna Rangahau.
+        schema:
+          type: string
+      - name: identifier
+        in: query
+        required: false
+        description: OAI identifier, e.g. oai:ir.wgtn.ac.nz:123456789/3590.
+        schema:
+          type: string
+      - name: from
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: until
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: resumptionToken
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OAI-PMH response envelope. Note that OAI-PMH signals protocol errors inside a 200
+            response via an <error> element rather than with an HTTP status code, so a caller must read
+            the body.
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OaiPmhResponse'
+  /server/api:
+    get:
+      operationId: getDspaceRestRoot
+      summary: DSpace REST API HAL root
+      description: 'Anonymous HAL+JSON root of the repository''s REST API. Verified 2026-08-30: HTTP 200,
+        Content-Type application/hal+json, dspaceVersion "DSpace 7.6.7", dspaceName "Institutional Repository
+        at Victoria University of Wellington", dspaceServer https://ir.wgtn.ac.nz/server. The response
+        is a link index; roughly sixty named link relations are advertised, most of which require authentication.'
+      tags:
+      - ResearchRepository
+      responses:
+        '200':
+          description: HAL root document.
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/RestRoot'
+  /server/api/core/communities:
+    get:
+      operationId: listCommunities
+      summary: List repository communities
+      description: Anonymously readable. Verified 2026-08-30 returning HTTP 200 and HAL-embedded community
+        objects with uuid, name, handle and Dublin Core metadata.
+      tags:
+      - ResearchRepository
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: size
+        in: query
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Paged HAL collection of communities.
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/PagedHal'
+  /server/api/core/collections:
+    get:
+      operationId: listCollections
+      summary: List repository collections
+      description: 'Anonymously readable. Verified 2026-08-30: HTTP 200, page.totalElements 18.'
+      tags:
+      - ResearchRepository
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: size
+        in: query
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Paged HAL collection of collections.
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/PagedHal'
+  /server/api/discover/search/objects:
+    get:
+      operationId: discoverSearchObjects
+      summary: Anonymous discovery search
+      description: The public search index. Verified 2026-08-30 returning HTTP 200 and embedded indexableObject
+        items with uuid, handle and metadata. This is the anonymous read path; /server/api/core/items
+        returns HTTP 401 "Authentication is required", so item enumeration is only available through discovery
+        or through OAI-PMH.
+      tags:
+      - ResearchRepository
+      parameters:
+      - name: query
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: scope
+        in: query
+        required: false
+        schema:
+          type: string
+          format: uuid
+      - name: size
+        in: query
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Discovery result set.
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/PagedHal'
+  /server/api/core/items:
+    get:
+      operationId: listItems
+      summary: List items (authenticated)
+      description: 'Recorded because the negative result is a finding. Verified 2026-08-30: an anonymous
+        call returns HTTP 401 with {"status":401,"error":"Unauthorized","message":"Authentication is required"}.
+        The endpoint is live and gated, not absent. Authentication is a DSpace bearer token from /server/api/authn/login;
+        no anonymous or self-service credential exists.'
+      tags:
+      - ResearchRepository
+      responses:
+        '401':
+          description: Authentication required.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+      security:
+      - dspaceBearerToken: []
+  /server/opensearch/service:
+    get:
+      operationId: getOpenSearchDescription
+      summary: OpenSearch 1.1 description document
+      description: 'Verified 2026-08-30: HTTP 200, Content-Type application/opensearchdescription+xml,
+        LongName "Institutional Repository at Victoria University of Wellington", Contact library-systems@vuw.ac.nz.
+        Makes the repository''s search addressable by any OpenSearch client without a key.'
+      tags:
+      - ResearchRepository
+      responses:
+        '200':
+          description: OpenSearch 1.1 description.
+          content:
+            application/opensearchdescription+xml:
+              schema:
+                type: string
+  /server/opensearch/search:
+    get:
+      operationId: openSearchQuery
+      summary: OpenSearch query returning Atom
+      description: 'Verified 2026-08-30 with query=maori&format=atom: HTTP 200, Content-Type application/atom+xml.
+        Keyless.'
+      tags:
+      - ResearchRepository
+      parameters:
+      - name: query
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: format
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - atom
+          - rss
+          - html
+      responses:
+        '200':
+          description: Atom or RSS result feed.
+          content:
+            application/atom+xml:
+              schema:
+                type: string
+  /server/signposting/links/{uuid}:
+    get:
+      operationId: getSignpostingLinks
+      summary: FAIR Signposting link set for an item
+      description: 'Verified 2026-08-30: HTTP 200, application/json, returning typed link relations for
+        a repository item — `item` (the PDF bitstream), `describedby` (application/vnd.datacite.datacite+xml),
+        `cite-as` (the Handle), `license`, `linkset` (both application/linkset and application/linkset+json)
+        and schema.org `type` relations. This is machine-actionable FAIR navigation served from the institution''s
+        own host.'
+      tags:
+      - ResearchRepository
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Array of typed link objects.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SignpostingLink'
+  /sitemap_index.xml:
+    get:
+      operationId: getSitemapIndex
+      summary: Repository sitemap index
+      description: 'Advertised in the repository''s own robots.txt and verified 2026-08-30: HTTP 200,
+        Content-Type text/xml.'
+      tags:
+      - ResearchRepository
+      responses:
+        '200':
+          description: Sitemap index.
+          content:
+            text/xml:
+              schema:
+                type: string
+components:
+  schemas:
+    OaiPmhResponse:
+      type: object
+      description: OAI-PMH 2.0 response envelope, defined by the Open Archives Initiative Protocol for
+        Metadata Harvesting 2.0, not by this document.
+      properties:
+        responseDate:
+          type: string
+          format: date-time
+        request:
+          type: string
+          format: uri
+        Identify:
+          $ref: '#/components/schemas/OaiIdentify'
+        error:
+          type: string
+          description: Protocol-level error, returned inside an HTTP 200 response.
+    OaiIdentify:
+      type: object
+      properties:
+        repositoryName:
+          type: string
+          example: Institutional Repository at Victoria University of Wellington
+        baseURL:
+          type: string
+          format: uri
+          example: https://ir.wgtn.ac.nz/oai/request
+        protocolVersion:
+          type: string
+          example: '2.0'
+        adminEmail:
+          type: string
+          format: email
+          example: library-systems@vuw.ac.nz
+        earliestDatestamp:
+          type: string
+        deletedRecord:
+          type: string
+          example: transient
+        granularity:
+          type: string
+          example: YYYY-MM-DDThh:mm:ssZ
+        repositoryIdentifier:
+          type: string
+          example: ir.wgtn.ac.nz
+    RestRoot:
+      type: object
+      description: DSpace REST HAL root document.
+      properties:
+        dspaceUI:
+          type: string
+          format: uri
+        dspaceName:
+          type: string
+        dspaceServer:
+          type: string
+          format: uri
+        dspaceVersion:
+          type: string
+          example: DSpace 7.6.7
+        type:
+          type: string
+          example: root
+        _links:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              href:
+                type: string
+                format: uri
+    PagedHal:
+      type: object
+      description: Spring HATEOAS paged representation as returned by DSpace.
+      properties:
+        _embedded:
+          type: object
+        _links:
+          type: object
+        page:
+          type: object
+          properties:
+            size:
+              type: integer
+            totalElements:
+              type: integer
+            totalPages:
+              type: integer
+            number:
+              type: integer
+    SignpostingLink:
+      type: object
+      properties:
+        href:
+          type: string
+          format: uri
+        rel:
+          type: string
+          example: cite-as
+        type:
+          type: string
+          example: application/vnd.datacite.datacite+xml
+    RestError:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+        status:
+          type: integer
+        error:
+          type: string
+        message:
+          type: string
+        path:
+          type: string
+  securitySchemes:
+    dspaceBearerToken:
+      type: http
+      scheme: bearer
+      description: DSpace short-lived JWT, obtained through /server/api/authn/login with an EPerson account
+        in this repository. Accounts are issued by Victoria University of Wellington Library Systems,
+        not self-service. Required only for the endpoints marked below; every other path in this document
+        was verified anonymously.
+security: []

@@ -1,0 +1,119 @@
+specification: API Commons Authentication
+specificationVersion: '0.1'
+provider: Victoria University of Wellington
+providerId: victoria-university-of-wellington
+generated: '2026-08-30'
+method: derived
+probe_date: '2026-08-30'
+probe_note: >-
+  Written by API Evangelist from live, unauthenticated probes. Every status code and payload
+  quoted below was observed on the date above; nothing here was published by the institution.
+source: live unauthenticated probes of every host in apis.yml, 2026-08-30
+description: >-
+  Authentication posture across Te Herenga Waka—Victoria University of Wellington's programmable
+  surfaces. The institution issues no API keys and operates no developer portal, so there is nothing
+  to register for. Every surface is either fully open or gated behind institutional identity — there
+  is no middle tier.
+surfaces:
+- name: Website Global Object
+  operator: institution
+  url: https://www.wgtn.ac.nz/api/globalobject
+  scheme: none
+  detail: >-
+    No authentication. HTTP 200 to an anonymous GET. Response carries
+    Access-Control-Allow-Origin "*" and Access-Control-Allow-Methods "GET, HEAD, OPTIONS", so it is
+    callable directly from a browser on any origin. No API key, no bearer token, no rate-limit
+    header observed.
+- name: Institutional repository — OAI-PMH, OpenSearch, Signposting
+  operator: institution
+  url: https://ir.wgtn.ac.nz/oai/request
+  scheme: none
+  detail: >-
+    No authentication and no key. The university's self-hosted DSpace 7.6.7 at ir.wgtn.ac.nz serves
+    its OAI-PMH 2.0 base URL, its OpenSearch 1.1 description and Atom result feed, and its FAIR
+    Signposting link sets to any anonymous caller — all returned HTTP 200 on 2026-08-30. This is the
+    only keyless, institution-operated bulk-data interface the university has, and it is
+    substantial: 23,150 records in twelve metadata formats.
+- name: Institutional repository — DSpace REST
+  operator: institution
+  url: https://ir.wgtn.ac.nz/server/api
+  scheme: bearer
+  detail: >-
+    SPLIT SURFACE. The HAL root, /server/api/core/communities, /server/api/core/collections and
+    /server/api/discover/search/objects all answer anonymously with HTTP 200. Item enumeration does
+    not: /server/api/core/items returns HTTP 401 {"status":401,"error":"Unauthorized","message":
+    "Authentication is required"}. The credential is a DSpace JWT from /server/api/authn/login tied
+    to an EPerson account issued by Library Systems — not self-service, and not purchasable.
+- name: Shibboleth Identity Provider metadata
+  operator: institution
+  url: https://idp.vuw.ac.nz/idp/shibboleth
+  scheme: none
+  detail: >-
+    Metadata retrieval is unauthenticated by design — SAML metadata must be publicly readable for
+    federation to work. The SSO endpoints behind it are not open: an unbound request to
+    /idp/profile/SAML2/Redirect/SSO returns HTTP 400, and a valid flow requires a signed
+    AuthnRequest from a service provider registered in Tuakiri.
+- name: Library discovery SRU
+  operator: tenant
+  url: https://tewaharoa.victoria.ac.nz/view/sru/64VUW_INST
+  scheme: none
+  detail: >-
+    Ex Libris Primo/Alma SRU 1.2 on the institution's own subdomain. Keyless: an anonymous
+    searchRetrieve returned HTTP 200 and 20,136 matching MARCXML records. This is the most
+    substantial anonymously callable interface associated with the institution, and the contract
+    behind it is Ex Libris's.
+- name: Open Access repository
+  operator: tenant
+  url: https://openaccess.wgtn.ac.nz/
+  scheme: none
+  detail: >-
+    Public repository, but the AWS WAF in front of it answers an anonymous non-browser request with
+    HTTP 202 and header x-amzn-waf-action "challenge" — a JavaScript bot challenge, not a
+    credential requirement. Live and bot-gated, not dead and not authenticated.
+- name: Nuku learning management (Canvas)
+  operator: tenant
+  url: https://nuku.wgtn.ac.nz/api/v1
+  scheme: oauth2
+  detail: >-
+    Instructure Canvas REST API. Anonymous call returns HTTP 401
+    {"status":"unauthenticated","errors":[{"message":"user authorisation required"}]}. Access
+    requires a Canvas OAuth2 token issued to a VUW account; browser sign-on federates to the
+    university's Microsoft Entra ID tenant.
+- name: Symplectic Elements research information system
+  operator: tenant
+  url: https://elements.wgtn.ac.nz/
+  scheme: institutional
+  detail: >-
+    HTTP 401 to an anonymous request. Host CNAMEs to vuw.elements.symplectic.org. The Elements API
+    is available to the institution under its Symplectic contract but is not public.
+- name: Enterprise single sign-on (WSO2 Identity Server)
+  operator: institution
+  url: https://auth-eis.vuw.ac.nz/
+  scheme: saml
+  detail: >-
+    Self-hosted WSO2 Identity Server, resolving directly to 130.195.13.55 with no CNAME. It is the
+    SAML issuer behind studentrecords.vuw.ac.nz, reached at /samlsso with a signed SAMLRequest and
+    RelayState /c/auth/SSB. Every discovery endpoint WSO2 normally publishes returns HTTP 403 from a
+    web application firewall that echoes a signature ID and the caller's IP — live and protected,
+    not missing.
+
+- name: Student records (Ellucian Banner Self-Service)
+  operator: tenant
+  url: https://studentrecords.vuw.ac.nz/
+  scheme: saml
+  detail: >-
+    HTTP 200 only after a redirect into the WSO2 SAML flow. No anonymous read, no public API, no
+    documented interface. Self-hosted on institution infrastructure (130.195.15.120, no CNAME); the
+    contract remains Ellucian's.
+
+- name: Microsoft Entra ID tenant
+  operator: tenant
+  url: https://login.microsoftonline.com/cfe63e23-6951-427e-8683-bb84dcf1d20c/v2.0/.well-known/openid-configuration
+  scheme: oidc
+  detail: >-
+    OpenID Connect discovery document for the university's Entra ID tenant returns HTTP 200
+    anonymously, as does the WS-Federation/SAML federationmetadata document. Discovery is open;
+    every token endpoint behind it requires a registered client.
+notes: >-
+  No institution-issued API credential of any kind was found. Nothing here is purchasable, and
+  nothing here is self-service.

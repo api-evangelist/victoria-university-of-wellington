@@ -1,0 +1,69 @@
+specification: API Commons Lifecycle
+specificationVersion: '0.1'
+provider: Victoria University of Wellington
+providerId: victoria-university-of-wellington
+generated: '2026-08-30'
+method: derived
+probe_date: '2026-08-30'
+probe_note: >-
+  Written by API Evangelist from live, unauthenticated probes. Every status code and payload
+  quoted below was observed on the date above; nothing here was published by the institution.
+source: live probes and public repository history, 2026-08-30
+description: >-
+  Lifecycle and change-management posture. Te Herenga Waka—Victoria University of Wellington
+  publishes no API versioning policy, no deprecation policy, no changelog and no status page for any
+  interface it operates. Nothing below is a policy the institution states; it is what the evidence
+  shows.
+signals:
+- surface: Website Global Object
+  operator: institution
+  versioning: none
+  detail: >-
+    No version segment in the path, no version field in the payload, no media-type versioning. The
+    response carries Last-Modified "Wed, 10 Apr 2024 21:22:16 GMT" — the configuration has been
+    stable for roughly two years — served through Cloudflare and Fastly with cf-cache-status
+    DYNAMIC. Undocumented and unversioned: it may change or be withdrawn without notice, and any
+    consumer should treat it as such.
+- surface: Institutional repository (self-hosted DSpace)
+  operator: institution
+  versioning: platform
+  detail: >-
+    The repository reports its own software version in the REST root — dspaceVersion "DSpace 7.6.7"
+    — which is the only place in this institution's entire footprint where a machine-readable
+    version string is served at all. That version is the platform's, not an interface contract the
+    university maintains: the university publishes no versioning policy, no deprecation notice and
+    no changelog for the endpoint, and an upgrade of the underlying DSpace would change the REST
+    surface without any announcement from the institution. The OAI-PMH interface is the stable one
+    by standard rather than by policy — protocolVersion 2.0, deletedRecord "transient",
+    granularity YYYY-MM-DDThh:mm:ssZ — and `transient` is itself a lifecycle statement worth
+    reading: the repository does not guarantee that a deletion, once reported, will keep being
+    reported to harvesters.
+- surface: Shibboleth Identity Provider
+  operator: institution
+  versioning: standard
+  detail: >-
+    Versioning is the SAML 2.0 protocol's, not the institution's. Federation change management is
+    handled by Tuakiri, which has carried this entity since 2012-06-26 and republishes it in a
+    signed aggregate. That is a fourteen-year continuous registration and is the strongest
+    lifecycle signal the institution has.
+- surface: Public code
+  operator: institution
+  versioning: repository
+  detail: >-
+    Three GitHub organisations. github.com/victoriauniversity (5 public repos, UI kit and web
+    toolkit; most recent activity 2026-08-06). github.com/VUW-Library (3 repos; last activity
+    2022-11-01, including an httpd proxy the library wrote for its own Figshare OAI-PMH set).
+    github.com/vuw-research-computing (19 repos, actively maintained; raapoi-tools updated
+    2026-08-28) supporting the Rāpoi HPC cluster. Only the research-computing org is currently
+    active.
+- surface: Course catalogue
+  operator: institution
+  versioning: academic-year
+  detail: >-
+    Course pages are versioned by academic year in the URL (/courses/<subject>/<code>/<year>), and
+    sitemap-courses.xml enumerates 12,160 course-year URLs. This is a machine-readable catalogue
+    with a real versioning convention, delivered as HTML plus schema.org JSON-LD rather than as an
+    API.
+status_page: none
+deprecation_policy: none
+changelog: none

@@ -6,6 +6,8 @@ providerId: victoria-university-of-wellington
 created: '2026-06-03'
 modified: '2026-06-03'
 reconciled: false
+method: generated
+source: apis.yml + live probes
 tags:
 - Education
 - Higher Education
