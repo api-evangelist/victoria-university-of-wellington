@@ -46,36 +46,6 @@ paths:
                 type: string
 components:
   schemas:
-    GlobalObject:
-      type: object
-      description: Global site configuration for the Te Herenga Waka public website.
-      properties:
-        baseUrls:
-          $ref: '#/components/schemas/BaseUrls'
-        logo:
-          $ref: '#/components/schemas/Logo'
-        navigation:
-          $ref: '#/components/schemas/Navigation'
-        apply:
-          $ref: '#/components/schemas/CallToAction'
-        search:
-          $ref: '#/components/schemas/SearchConfig'
-        contacts:
-          $ref: '#/components/schemas/Contacts'
-        copyright:
-          type: string
-          description: HTML-escaped copyright line for the institution.
-        debug:
-          type: string
-          description: CMS debug flag. Observed empty on the public surface.
-    SearchConfig:
-      type: object
-      description: Form contracts for the public and intranet site search.
-      properties:
-        public:
-          $ref: '#/components/schemas/SearchForm'
-        intranet:
-          $ref: '#/components/schemas/SearchForm'
     BaseUrls:
       type: object
       description: Canonical base URLs the front end composes links from.
@@ -100,6 +70,46 @@ components:
           type: string
           format: uri
           description: Root of the study-area and programme explorer.
+    Contacts:
+      type: object
+      properties:
+        tel:
+          type: object
+          properties:
+            main:
+              type: string
+            mainInternational:
+              type: string
+            emergency:
+              type: string
+            emergencyExtension:
+              type: string
+        mail:
+          type: object
+          properties:
+            main:
+              type: string
+              format: email
+    CallToAction:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+        text:
+          type: string
+    Logo:
+      type: object
+      properties:
+        title:
+          type: string
+        href:
+          type: string
+          format: uri
+        alt:
+          type: string
+        assets:
+          $ref: '#/components/schemas/LogoAssets'
     LogoAssets:
       type: object
       description: Logo image manifest. Each breakpoint key carries a source path relative to `basePath` and the intrinsic width-to-height ratio.
@@ -124,26 +134,13 @@ components:
           description: Alternate green-brand variants, keyed by the same breakpoint names.
           additionalProperties:
             $ref: '#/components/schemas/LogoAsset'
-    Logo:
+    LogoAsset:
       type: object
       properties:
-        title:
+        src:
           type: string
-        href:
-          type: string
-          format: uri
-        alt:
-          type: string
-        assets:
-          $ref: '#/components/schemas/LogoAssets'
-    CallToAction:
-      type: object
-      properties:
-        url:
-          type: string
-          format: uri
-        text:
-          type: string
+        widthToHeightRatio:
+          type: number
     SearchForm:
       type: object
       properties:
@@ -163,26 +160,6 @@ components:
           properties:
             placeHolder:
               type: string
-    Contacts:
-      type: object
-      properties:
-        tel:
-          type: object
-          properties:
-            main:
-              type: string
-            mainInternational:
-              type: string
-            emergency:
-              type: string
-            emergencyExtension:
-              type: string
-        mail:
-          type: object
-          properties:
-            main:
-              type: string
-              format: email
     Navigation:
       type: object
       properties:
@@ -215,11 +192,34 @@ components:
         type:
           type: string
           description: Item kind. `link` observed.
-    LogoAsset:
+    GlobalObject:
       type: object
+      description: Global site configuration for the Te Herenga Waka public website.
       properties:
-        src:
+        baseUrls:
+          $ref: '#/components/schemas/BaseUrls'
+        logo:
+          $ref: '#/components/schemas/Logo'
+        navigation:
+          $ref: '#/components/schemas/Navigation'
+        apply:
+          $ref: '#/components/schemas/CallToAction'
+        search:
+          $ref: '#/components/schemas/SearchConfig'
+        contacts:
+          $ref: '#/components/schemas/Contacts'
+        copyright:
           type: string
-        widthToHeightRatio:
-          type: number
+          description: HTML-escaped copyright line for the institution.
+        debug:
+          type: string
+          description: CMS debug flag. Observed empty on the public surface.
+    SearchConfig:
+      type: object
+      description: Form contracts for the public and intranet site search.
+      properties:
+        public:
+          $ref: '#/components/schemas/SearchForm'
+        intranet:
+          $ref: '#/components/schemas/SearchForm'
 x-operator: institution
