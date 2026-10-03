@@ -82,16 +82,6 @@ paths:
                 type: string
 components:
   schemas:
-    EntityDescriptor:
-      type: object
-      description: SAML 2.0 metadata `EntityDescriptor`, defined by OASIS saml-metadata-2.0-os, not by this document. Modelled here only far enough to make the endpoint's payload legible to a catalog reader.
-      properties:
-        entityID:
-          type: string
-          format: uri
-          example: https://idp.vuw.ac.nz/idp/shibboleth
-        IDPSSODescriptor:
-          $ref: '#/components/schemas/IDPSSODescriptor'
     IDPSSODescriptor:
       type: object
       properties:
@@ -123,4 +113,14 @@ components:
         Location:
           type: string
           format: uri
+    EntityDescriptor:
+      type: object
+      description: SAML 2.0 metadata `EntityDescriptor`, defined by OASIS saml-metadata-2.0-os, not by this document. Modelled here only far enough to make the endpoint's payload legible to a catalog reader.
+      properties:
+        entityID:
+          type: string
+          format: uri
+          example: https://idp.vuw.ac.nz/idp/shibboleth
+        IDPSSODescriptor:
+          $ref: '#/components/schemas/IDPSSODescriptor'
 x-operator: institution

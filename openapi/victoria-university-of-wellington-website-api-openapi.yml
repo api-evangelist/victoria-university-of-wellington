@@ -46,50 +46,31 @@ paths:
                 type: string
 components:
   schemas:
-    BaseUrls:
-      type: object
-      description: Canonical base URLs the front end composes links from.
-      properties:
-        mainDomain:
-          type: string
-          format: uri
-        intranet:
-          type: string
-          format: uri
-        cdnAssets:
-          type: string
-          format: uri
-        cmsAssets:
-          type: string
-          format: uri
-        courses:
-          type: string
-          format: uri
-          description: Root of the public course catalogue.
-        explore:
-          type: string
-          format: uri
-          description: Root of the study-area and programme explorer.
-    Contacts:
+    Navigation:
       type: object
       properties:
-        tel:
-          type: object
-          properties:
-            main:
-              type: string
-            mainInternational:
-              type: string
-            emergency:
-              type: string
-            emergencyExtension:
-              type: string
-        mail:
-          type: object
-          properties:
-            main:
-              type: string
-              format: email
+        root:
+          type: array
+          description: Primary audience navigation.
+          items:
+            $ref: '#/components/schemas/NavItem'
+        alternate:
+          type: array
+          description: Secondary utility navigation.
+          items:
+            $ref: '#/components/schemas/NavItem'
+        footer:
+          type: array
+          description: Footer navigation.
+          items:
+            $ref: '#/components/schemas/NavItem'
+    LogoAsset:
+      type: object
+      properties:
+        src:
+          type: string
+        widthToHeightRatio:
+          type: number
     CallToAction:
       type: object
       properties:
@@ -98,18 +79,14 @@ components:
           format: uri
         text:
           type: string
-    Logo:
+    SearchConfig:
       type: object
+      description: Form contracts for the public and intranet site search.
       properties:
-        title:
-          type: string
-        href:
-          type: string
-          format: uri
-        alt:
-          type: string
-        assets:
-          $ref: '#/components/schemas/LogoAssets'
+        public:
+          $ref: '#/components/schemas/SearchForm'
+        intranet:
+          $ref: '#/components/schemas/SearchForm'
     LogoAssets:
       type: object
       description: Logo image manifest. Each breakpoint key carries a source path relative to `basePath` and the intrinsic width-to-height ratio.
@@ -134,50 +111,38 @@ components:
           description: Alternate green-brand variants, keyed by the same breakpoint names.
           additionalProperties:
             $ref: '#/components/schemas/LogoAsset'
-    LogoAsset:
+    Contacts:
       type: object
       properties:
-        src:
-          type: string
-        widthToHeightRatio:
-          type: number
-    SearchForm:
-      type: object
-      properties:
-        action:
-          type: string
-          description: Form action path or URL the query is submitted to.
-        queryName:
-          type: string
-          description: Query-string parameter name carrying the search term.
-        placeHolder:
-          type: string
-        submitValue:
-          type: string
-        new:
+        tel:
           type: object
-          description: Replacement copy for the redesigned search widget.
           properties:
-            placeHolder:
+            main:
               type: string
-    Navigation:
+            mainInternational:
+              type: string
+            emergency:
+              type: string
+            emergencyExtension:
+              type: string
+        mail:
+          type: object
+          properties:
+            main:
+              type: string
+              format: email
+    Logo:
       type: object
       properties:
-        root:
-          type: array
-          description: Primary audience navigation.
-          items:
-            $ref: '#/components/schemas/NavItem'
-        alternate:
-          type: array
-          description: Secondary utility navigation.
-          items:
-            $ref: '#/components/schemas/NavItem'
-        footer:
-          type: array
-          description: Footer navigation.
-          items:
-            $ref: '#/components/schemas/NavItem'
+        title:
+          type: string
+        href:
+          type: string
+          format: uri
+        alt:
+          type: string
+        assets:
+          $ref: '#/components/schemas/LogoAssets'
     NavItem:
       type: object
       properties:
@@ -214,12 +179,47 @@ components:
         debug:
           type: string
           description: CMS debug flag. Observed empty on the public surface.
-    SearchConfig:
+    SearchForm:
       type: object
-      description: Form contracts for the public and intranet site search.
       properties:
-        public:
-          $ref: '#/components/schemas/SearchForm'
+        action:
+          type: string
+          description: Form action path or URL the query is submitted to.
+        queryName:
+          type: string
+          description: Query-string parameter name carrying the search term.
+        placeHolder:
+          type: string
+        submitValue:
+          type: string
+        new:
+          type: object
+          description: Replacement copy for the redesigned search widget.
+          properties:
+            placeHolder:
+              type: string
+    BaseUrls:
+      type: object
+      description: Canonical base URLs the front end composes links from.
+      properties:
+        mainDomain:
+          type: string
+          format: uri
         intranet:
-          $ref: '#/components/schemas/SearchForm'
+          type: string
+          format: uri
+        cdnAssets:
+          type: string
+          format: uri
+        cmsAssets:
+          type: string
+          format: uri
+        courses:
+          type: string
+          format: uri
+          description: Root of the public course catalogue.
+        explore:
+          type: string
+          format: uri
+          description: Root of the study-area and programme explorer.
 x-operator: institution

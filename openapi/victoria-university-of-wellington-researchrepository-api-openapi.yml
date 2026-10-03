@@ -290,6 +290,46 @@ paths:
                 type: string
 components:
   schemas:
+    OaiIdentify:
+      type: object
+      properties:
+        repositoryName:
+          type: string
+          example: Institutional Repository at Victoria University of Wellington
+        baseURL:
+          type: string
+          format: uri
+          example: https://ir.wgtn.ac.nz/oai/request
+        protocolVersion:
+          type: string
+          example: '2.0'
+        adminEmail:
+          type: string
+          format: email
+          example: library-systems@vuw.ac.nz
+        earliestDatestamp:
+          type: string
+        deletedRecord:
+          type: string
+          example: transient
+        granularity:
+          type: string
+          example: YYYY-MM-DDThh:mm:ssZ
+        repositoryIdentifier:
+          type: string
+          example: ir.wgtn.ac.nz
+    SignpostingLink:
+      type: object
+      properties:
+        href:
+          type: string
+          format: uri
+        rel:
+          type: string
+          example: cite-as
+        type:
+          type: string
+          example: application/vnd.datacite.datacite+xml
     PagedHal:
       type: object
       description: Spring HATEOAS paged representation as returned by DSpace.
@@ -309,33 +349,6 @@ components:
               type: integer
             number:
               type: integer
-    OaiPmhResponse:
-      type: object
-      description: OAI-PMH 2.0 response envelope, defined by the Open Archives Initiative Protocol for Metadata Harvesting 2.0, not by this document.
-      properties:
-        responseDate:
-          type: string
-          format: date-time
-        request:
-          type: string
-          format: uri
-        Identify:
-          $ref: '#/components/schemas/OaiIdentify'
-        error:
-          type: string
-          description: Protocol-level error, returned inside an HTTP 200 response.
-    SignpostingLink:
-      type: object
-      properties:
-        href:
-          type: string
-          format: uri
-        rel:
-          type: string
-          example: cite-as
-        type:
-          type: string
-          example: application/vnd.datacite.datacite+xml
     RestRoot:
       type: object
       description: DSpace REST HAL root document.
@@ -376,34 +389,21 @@ components:
           type: string
         path:
           type: string
-    OaiIdentify:
+    OaiPmhResponse:
       type: object
+      description: OAI-PMH 2.0 response envelope, defined by the Open Archives Initiative Protocol for Metadata Harvesting 2.0, not by this document.
       properties:
-        repositoryName:
+        responseDate:
           type: string
-          example: Institutional Repository at Victoria University of Wellington
-        baseURL:
+          format: date-time
+        request:
           type: string
           format: uri
-          example: https://ir.wgtn.ac.nz/oai/request
-        protocolVersion:
+        Identify:
+          $ref: '#/components/schemas/OaiIdentify'
+        error:
           type: string
-          example: '2.0'
-        adminEmail:
-          type: string
-          format: email
-          example: library-systems@vuw.ac.nz
-        earliestDatestamp:
-          type: string
-        deletedRecord:
-          type: string
-          example: transient
-        granularity:
-          type: string
-          example: YYYY-MM-DDThh:mm:ssZ
-        repositoryIdentifier:
-          type: string
-          example: ir.wgtn.ac.nz
+          description: Protocol-level error, returned inside an HTTP 200 response.
   securitySchemes:
     dspaceBearerToken:
       type: http
