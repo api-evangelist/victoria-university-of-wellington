@@ -46,6 +46,13 @@ paths:
                 type: string
 components:
   schemas:
+    LogoAsset:
+      type: object
+      properties:
+        src:
+          type: string
+        widthToHeightRatio:
+          type: number
     Navigation:
       type: object
       properties:
@@ -64,29 +71,6 @@ components:
           description: Footer navigation.
           items:
             $ref: '#/components/schemas/NavItem'
-    LogoAsset:
-      type: object
-      properties:
-        src:
-          type: string
-        widthToHeightRatio:
-          type: number
-    CallToAction:
-      type: object
-      properties:
-        url:
-          type: string
-          format: uri
-        text:
-          type: string
-    SearchConfig:
-      type: object
-      description: Form contracts for the public and intranet site search.
-      properties:
-        public:
-          $ref: '#/components/schemas/SearchForm'
-        intranet:
-          $ref: '#/components/schemas/SearchForm'
     LogoAssets:
       type: object
       description: Logo image manifest. Each breakpoint key carries a source path relative to `basePath` and the intrinsic width-to-height ratio.
@@ -111,93 +95,6 @@ components:
           description: Alternate green-brand variants, keyed by the same breakpoint names.
           additionalProperties:
             $ref: '#/components/schemas/LogoAsset'
-    Contacts:
-      type: object
-      properties:
-        tel:
-          type: object
-          properties:
-            main:
-              type: string
-            mainInternational:
-              type: string
-            emergency:
-              type: string
-            emergencyExtension:
-              type: string
-        mail:
-          type: object
-          properties:
-            main:
-              type: string
-              format: email
-    Logo:
-      type: object
-      properties:
-        title:
-          type: string
-        href:
-          type: string
-          format: uri
-        alt:
-          type: string
-        assets:
-          $ref: '#/components/schemas/LogoAssets'
-    NavItem:
-      type: object
-      properties:
-        href:
-          type: string
-          format: uri
-        class:
-          type: string
-        content:
-          type: string
-          description: Link label as rendered.
-        type:
-          type: string
-          description: Item kind. `link` observed.
-    GlobalObject:
-      type: object
-      description: Global site configuration for the Te Herenga Waka public website.
-      properties:
-        baseUrls:
-          $ref: '#/components/schemas/BaseUrls'
-        logo:
-          $ref: '#/components/schemas/Logo'
-        navigation:
-          $ref: '#/components/schemas/Navigation'
-        apply:
-          $ref: '#/components/schemas/CallToAction'
-        search:
-          $ref: '#/components/schemas/SearchConfig'
-        contacts:
-          $ref: '#/components/schemas/Contacts'
-        copyright:
-          type: string
-          description: HTML-escaped copyright line for the institution.
-        debug:
-          type: string
-          description: CMS debug flag. Observed empty on the public surface.
-    SearchForm:
-      type: object
-      properties:
-        action:
-          type: string
-          description: Form action path or URL the query is submitted to.
-        queryName:
-          type: string
-          description: Query-string parameter name carrying the search term.
-        placeHolder:
-          type: string
-        submitValue:
-          type: string
-        new:
-          type: object
-          description: Replacement copy for the redesigned search widget.
-          properties:
-            placeHolder:
-              type: string
     BaseUrls:
       type: object
       description: Canonical base URLs the front end composes links from.
@@ -222,4 +119,107 @@ components:
           type: string
           format: uri
           description: Root of the study-area and programme explorer.
+    Contacts:
+      type: object
+      properties:
+        tel:
+          type: object
+          properties:
+            main:
+              type: string
+            mainInternational:
+              type: string
+            emergency:
+              type: string
+            emergencyExtension:
+              type: string
+        mail:
+          type: object
+          properties:
+            main:
+              type: string
+              format: email
+    CallToAction:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+        text:
+          type: string
+    GlobalObject:
+      type: object
+      description: Global site configuration for the Te Herenga Waka public website.
+      properties:
+        baseUrls:
+          $ref: '#/components/schemas/BaseUrls'
+        logo:
+          $ref: '#/components/schemas/Logo'
+        navigation:
+          $ref: '#/components/schemas/Navigation'
+        apply:
+          $ref: '#/components/schemas/CallToAction'
+        search:
+          $ref: '#/components/schemas/SearchConfig'
+        contacts:
+          $ref: '#/components/schemas/Contacts'
+        copyright:
+          type: string
+          description: HTML-escaped copyright line for the institution.
+        debug:
+          type: string
+          description: CMS debug flag. Observed empty on the public surface.
+    SearchConfig:
+      type: object
+      description: Form contracts for the public and intranet site search.
+      properties:
+        public:
+          $ref: '#/components/schemas/SearchForm'
+        intranet:
+          $ref: '#/components/schemas/SearchForm'
+    NavItem:
+      type: object
+      properties:
+        href:
+          type: string
+          format: uri
+        class:
+          type: string
+        content:
+          type: string
+          description: Link label as rendered.
+        type:
+          type: string
+          description: Item kind. `link` observed.
+    SearchForm:
+      type: object
+      properties:
+        action:
+          type: string
+          description: Form action path or URL the query is submitted to.
+        queryName:
+          type: string
+          description: Query-string parameter name carrying the search term.
+        placeHolder:
+          type: string
+        submitValue:
+          type: string
+        new:
+          type: object
+          description: Replacement copy for the redesigned search widget.
+          properties:
+            placeHolder:
+              type: string
+    Logo:
+      type: object
+      properties:
+        title:
+          type: string
+        href:
+          type: string
+          format: uri
+        alt:
+          type: string
+        assets:
+          $ref: '#/components/schemas/LogoAssets'
 x-operator: institution

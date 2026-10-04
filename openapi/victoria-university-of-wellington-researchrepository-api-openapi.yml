@@ -290,6 +290,18 @@ paths:
                 type: string
 components:
   schemas:
+    SignpostingLink:
+      type: object
+      properties:
+        href:
+          type: string
+          format: uri
+        rel:
+          type: string
+          example: cite-as
+        type:
+          type: string
+          example: application/vnd.datacite.datacite+xml
     OaiIdentify:
       type: object
       properties:
@@ -318,37 +330,6 @@ components:
         repositoryIdentifier:
           type: string
           example: ir.wgtn.ac.nz
-    SignpostingLink:
-      type: object
-      properties:
-        href:
-          type: string
-          format: uri
-        rel:
-          type: string
-          example: cite-as
-        type:
-          type: string
-          example: application/vnd.datacite.datacite+xml
-    PagedHal:
-      type: object
-      description: Spring HATEOAS paged representation as returned by DSpace.
-      properties:
-        _embedded:
-          type: object
-        _links:
-          type: object
-        page:
-          type: object
-          properties:
-            size:
-              type: integer
-            totalElements:
-              type: integer
-            totalPages:
-              type: integer
-            number:
-              type: integer
     RestRoot:
       type: object
       description: DSpace REST HAL root document.
@@ -389,6 +370,25 @@ components:
           type: string
         path:
           type: string
+    PagedHal:
+      type: object
+      description: Spring HATEOAS paged representation as returned by DSpace.
+      properties:
+        _embedded:
+          type: object
+        _links:
+          type: object
+        page:
+          type: object
+          properties:
+            size:
+              type: integer
+            totalElements:
+              type: integer
+            totalPages:
+              type: integer
+            number:
+              type: integer
     OaiPmhResponse:
       type: object
       description: OAI-PMH 2.0 response envelope, defined by the Open Archives Initiative Protocol for Metadata Harvesting 2.0, not by this document.
