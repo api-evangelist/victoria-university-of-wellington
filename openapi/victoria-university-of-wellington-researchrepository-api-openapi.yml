@@ -290,18 +290,35 @@ paths:
                 type: string
 components:
   schemas:
-    SignpostingLink:
+    RestError:
       type: object
       properties:
-        href:
+        timestamp:
+          type: string
+          format: date-time
+        status:
+          type: integer
+        error:
+          type: string
+        message:
+          type: string
+        path:
+          type: string
+    OaiPmhResponse:
+      type: object
+      description: OAI-PMH 2.0 response envelope, defined by the Open Archives Initiative Protocol for Metadata Harvesting 2.0, not by this document.
+      properties:
+        responseDate:
+          type: string
+          format: date-time
+        request:
           type: string
           format: uri
-        rel:
+        Identify:
+          $ref: '#/components/schemas/OaiIdentify'
+        error:
           type: string
-          example: cite-as
-        type:
-          type: string
-          example: application/vnd.datacite.datacite+xml
+          description: Protocol-level error, returned inside an HTTP 200 response.
     OaiIdentify:
       type: object
       properties:
@@ -330,6 +347,25 @@ components:
         repositoryIdentifier:
           type: string
           example: ir.wgtn.ac.nz
+    PagedHal:
+      type: object
+      description: Spring HATEOAS paged representation as returned by DSpace.
+      properties:
+        _embedded:
+          type: object
+        _links:
+          type: object
+        page:
+          type: object
+          properties:
+            size:
+              type: integer
+            totalElements:
+              type: integer
+            totalPages:
+              type: integer
+            number:
+              type: integer
     RestRoot:
       type: object
       description: DSpace REST HAL root document.
@@ -356,54 +392,18 @@ components:
               href:
                 type: string
                 format: uri
-    RestError:
+    SignpostingLink:
       type: object
       properties:
-        timestamp:
-          type: string
-          format: date-time
-        status:
-          type: integer
-        error:
-          type: string
-        message:
-          type: string
-        path:
-          type: string
-    PagedHal:
-      type: object
-      description: Spring HATEOAS paged representation as returned by DSpace.
-      properties:
-        _embedded:
-          type: object
-        _links:
-          type: object
-        page:
-          type: object
-          properties:
-            size:
-              type: integer
-            totalElements:
-              type: integer
-            totalPages:
-              type: integer
-            number:
-              type: integer
-    OaiPmhResponse:
-      type: object
-      description: OAI-PMH 2.0 response envelope, defined by the Open Archives Initiative Protocol for Metadata Harvesting 2.0, not by this document.
-      properties:
-        responseDate:
-          type: string
-          format: date-time
-        request:
+        href:
           type: string
           format: uri
-        Identify:
-          $ref: '#/components/schemas/OaiIdentify'
-        error:
+        rel:
           type: string
-          description: Protocol-level error, returned inside an HTTP 200 response.
+          example: cite-as
+        type:
+          type: string
+          example: application/vnd.datacite.datacite+xml
   securitySchemes:
     dspaceBearerToken:
       type: http

@@ -46,6 +46,99 @@ paths:
                 type: string
 components:
   schemas:
+    SearchConfig:
+      type: object
+      description: Form contracts for the public and intranet site search.
+      properties:
+        public:
+          $ref: '#/components/schemas/SearchForm'
+        intranet:
+          $ref: '#/components/schemas/SearchForm'
+    Contacts:
+      type: object
+      properties:
+        tel:
+          type: object
+          properties:
+            main:
+              type: string
+            mainInternational:
+              type: string
+            emergency:
+              type: string
+            emergencyExtension:
+              type: string
+        mail:
+          type: object
+          properties:
+            main:
+              type: string
+              format: email
+    NavItem:
+      type: object
+      properties:
+        href:
+          type: string
+          format: uri
+        class:
+          type: string
+        content:
+          type: string
+          description: Link label as rendered.
+        type:
+          type: string
+          description: Item kind. `link` observed.
+    CallToAction:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+        text:
+          type: string
+    LogoAssets:
+      type: object
+      description: Logo image manifest. Each breakpoint key carries a source path relative to `basePath` and the intrinsic width-to-height ratio.
+      properties:
+        basePath:
+          type: string
+          format: uri
+        desktop:
+          $ref: '#/components/schemas/LogoAsset'
+        desktopBrand:
+          $ref: '#/components/schemas/LogoAsset'
+        mobile:
+          $ref: '#/components/schemas/LogoAsset'
+        tablet:
+          $ref: '#/components/schemas/LogoAsset'
+        print:
+          $ref: '#/components/schemas/LogoAsset'
+        icon:
+          $ref: '#/components/schemas/LogoAsset'
+        green:
+          type: object
+          description: Alternate green-brand variants, keyed by the same breakpoint names.
+          additionalProperties:
+            $ref: '#/components/schemas/LogoAsset'
+    SearchForm:
+      type: object
+      properties:
+        action:
+          type: string
+          description: Form action path or URL the query is submitted to.
+        queryName:
+          type: string
+          description: Query-string parameter name carrying the search term.
+        placeHolder:
+          type: string
+        submitValue:
+          type: string
+        new:
+          type: object
+          description: Replacement copy for the redesigned search widget.
+          properties:
+            placeHolder:
+              type: string
     LogoAsset:
       type: object
       properties:
@@ -71,30 +164,6 @@ components:
           description: Footer navigation.
           items:
             $ref: '#/components/schemas/NavItem'
-    LogoAssets:
-      type: object
-      description: Logo image manifest. Each breakpoint key carries a source path relative to `basePath` and the intrinsic width-to-height ratio.
-      properties:
-        basePath:
-          type: string
-          format: uri
-        desktop:
-          $ref: '#/components/schemas/LogoAsset'
-        desktopBrand:
-          $ref: '#/components/schemas/LogoAsset'
-        mobile:
-          $ref: '#/components/schemas/LogoAsset'
-        tablet:
-          $ref: '#/components/schemas/LogoAsset'
-        print:
-          $ref: '#/components/schemas/LogoAsset'
-        icon:
-          $ref: '#/components/schemas/LogoAsset'
-        green:
-          type: object
-          description: Alternate green-brand variants, keyed by the same breakpoint names.
-          additionalProperties:
-            $ref: '#/components/schemas/LogoAsset'
     BaseUrls:
       type: object
       description: Canonical base URLs the front end composes links from.
@@ -119,34 +188,6 @@ components:
           type: string
           format: uri
           description: Root of the study-area and programme explorer.
-    Contacts:
-      type: object
-      properties:
-        tel:
-          type: object
-          properties:
-            main:
-              type: string
-            mainInternational:
-              type: string
-            emergency:
-              type: string
-            emergencyExtension:
-              type: string
-        mail:
-          type: object
-          properties:
-            main:
-              type: string
-              format: email
-    CallToAction:
-      type: object
-      properties:
-        url:
-          type: string
-          format: uri
-        text:
-          type: string
     GlobalObject:
       type: object
       description: Global site configuration for the Te Herenga Waka public website.
@@ -169,47 +210,6 @@ components:
         debug:
           type: string
           description: CMS debug flag. Observed empty on the public surface.
-    SearchConfig:
-      type: object
-      description: Form contracts for the public and intranet site search.
-      properties:
-        public:
-          $ref: '#/components/schemas/SearchForm'
-        intranet:
-          $ref: '#/components/schemas/SearchForm'
-    NavItem:
-      type: object
-      properties:
-        href:
-          type: string
-          format: uri
-        class:
-          type: string
-        content:
-          type: string
-          description: Link label as rendered.
-        type:
-          type: string
-          description: Item kind. `link` observed.
-    SearchForm:
-      type: object
-      properties:
-        action:
-          type: string
-          description: Form action path or URL the query is submitted to.
-        queryName:
-          type: string
-          description: Query-string parameter name carrying the search term.
-        placeHolder:
-          type: string
-        submitValue:
-          type: string
-        new:
-          type: object
-          description: Replacement copy for the redesigned search widget.
-          properties:
-            placeHolder:
-              type: string
     Logo:
       type: object
       properties:
