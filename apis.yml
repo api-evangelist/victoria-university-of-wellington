@@ -259,7 +259,7 @@ apis:
   humanURL: https://www.wgtn.ac.nz/teaching-support/teaching-with-technology
   baseURL: https://nuku.wgtn.ac.nz/
   tags:
-  - Learning Management
+  - LMS
   - Canvas
   - Instructure
   - LTI
